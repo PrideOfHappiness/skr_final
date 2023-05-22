@@ -33,7 +33,7 @@
                 </a>
           </li>
           <li class="nav-item"> 
-              <a href="/barang" class="nav-link">
+              <a href="/admin/barang" class="nav-link">
                 <i class="fa-solid fa-motorcycle"></i>
                   <p>
                     Data Barang
@@ -41,10 +41,18 @@
                 </a>
           </li>
           <li class="nav-item"> 
-            <a href="/wilayah" class="nav-link">
+            <a href="/admin/wilayah" class="nav-link">
               <i class="fa-solid fa-map-pin"></i>
                 <p>
                   Data Wilayah
+                </p>
+            </a>
+          </li>
+          <li class="nav-item"> 
+            <a href="/admin/gudang" class="nav-link">
+              <i class="fa-solid fa-warehouse"></i>
+                <p>
+                  Data Gudang
                 </p>
             </a>
           </li>

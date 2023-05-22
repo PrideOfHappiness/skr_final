@@ -34,17 +34,18 @@
                     <td>{{ $karyawan->status }}
                     <td> 
                         <form action = "{{ route('karyawan.destroy', $karyawan->id) }}" method="Post">
-                            <a class="badge bg-info" href="{{ route('karyawan.show', $karyawan->id)}}">Detail</span></a>
-                            <a class="badge bg-warning" href="{{ route('karyawan.edit', $karyawan->id)}}">Edit</span></a>
+                            <a class="badge bg-info" href="{{ route('karyawan.show', $karyawan->id)}}">Detail Karyawan</span></a>
+                            <a class="badge bg-warning" href="{{ route('karyawan.edit', $karyawan->id)}}">Edit Data</span></a>
                             @csrf
                                 @method("DELETE")
-                                <button type="submit" class="badge bg-danger"> Hapus Karyawan </button>
+                                <button type="submit" class="badge bg-danger"> Hapus Data Karyawan Ini</button>
                         </form>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        {!! $dataKaryawan->links() !!}
     </section>
     @include('template/footer')
 </body>

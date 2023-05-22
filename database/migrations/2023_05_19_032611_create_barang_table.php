@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nomor_mesin', 12)->unique();
             $table->string('kode_barang', 25);
             $table->string('nama_barang', 100);
-            $table->string('jenis', 7);
+            $table->string('jenis');
             $table->string('warna');
             $table->string('tahun_rakit');
             $table->string('status');

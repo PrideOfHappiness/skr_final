@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('gudang', function (Blueprint $table) {
             $table->string('kode_gudang', 5)->unique();
             $table->string('nama_gudang', 100);
+            $table->string('alamat_gudang');
             $table->timestamps();
         });
     }

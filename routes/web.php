@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KonsumenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +36,17 @@ Route::middleware(['auth'])->group(function() {
 Route::middleware(['Admin'])->group(function() {
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('adminHome');
     Route::resource('/admin/karyawan', KaryawanController::class);
+    Route::resource('/admin/wilayah', WilayahController::class);
+    Route::resource('/admin/gudang', GudangController::class);
+    Route::resource('/admin/barang', BarangController::class);
+    Route::get('/barang/imporData', [BarangController::class, 'importDataBarang']);
+    Route::post('/barang/imporData/impor', [BarangController::class, 'import'])->name('prosesImpor');
 });
 
 Route::middleware(['Karyawan'])->group(function() {
     Route::get('/karyawan/home', [HomeController::class, 'karyawanHome'])->name('karyawanHome');
+    Route::resource('/karyawan/konsumen', KonsumenController::class);
+    
 });
 
 Route::middleware(['Pemilik'])->group(function() {

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_karyawan')->unique();
+            $table->string('kode_karyawan', 8)->unique();
             $table->string('nama_karyawan');
             $table->string('alamat');
             $table->enum('gender', ['L', 'P']);

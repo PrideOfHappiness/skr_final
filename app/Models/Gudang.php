@@ -14,6 +14,7 @@ class Gudang extends Model
     protected $fillable = [
         'kode_gudang',
         'nama_gudang',
+        'alamat_gudang',
     ];
 
     public function gudang_penjualan(){

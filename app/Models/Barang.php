@@ -12,11 +12,14 @@ class Barang extends Model
     protected $table = 'barang';
 
     protected $fillable = [
+        'nomor_rangka',
+        'nomor_mesin',
         'kode_barang',
         'nama_barang',
+        'jenis',
         'warna',
-        'harga',
-        'namaFile',
+        'tahun_rakit',
+        'status',
     ];
 
     public function barang_penjualan(){

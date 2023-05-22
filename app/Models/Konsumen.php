@@ -19,6 +19,7 @@ class Konsumen extends Model
         'kecamatan',
         'no_ktp',
         'no_telp',
+        'namaFileKtp',
     ];
 
     public function wilayah(){
