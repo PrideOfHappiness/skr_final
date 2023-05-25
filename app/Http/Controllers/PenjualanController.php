@@ -13,6 +13,7 @@ use App\Exports\ExportPenjualan;
 use Carbon\Carbon;
 use Validator;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenjualanController extends Controller
 {
