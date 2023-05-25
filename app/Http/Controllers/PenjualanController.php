@@ -58,14 +58,14 @@ class PenjualanController extends Controller
             ->with('success', 'Data Penjualan berhasil ditambahkan!'); 
     }
 
-    public function download($no_fj){
-        $penjualan = Penjualan::where('no_fj', $no_fj)->first();
+    public function download($id){
+        $penjualan = Penjualan::find($id);
         $pdf = PDF::loadView('penjualan.fj', ['dataPenjualan' => $penjualan]);
         return $pdf->download('Faktur Jual' . $no_fj . '.pdf');
     }
 
     public function show($no_fj){
-        $penjualan = Penjualan::where('no_fj', $no_fj)->first();
+        $penjualan = Penjualan::find($id);
         return view('penjualan.show', compact('penjualan'));
     }
 
