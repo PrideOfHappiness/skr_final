@@ -9,18 +9,23 @@
     @include('template/sidebarKaryawan')
 
     <section class="content"> 
-        <form action={{ route('konsumen.update', $konsumen->kode_konsumen) }} method="post"> 
+        <form action={{ route('konsumen.update', $konsumen->id) }} method="post" enctype="multipart/form-data"> 
             @csrf
             @method('PUT')
 
             <input type="hidden" id="kode_konsumen" name="kode_konsumen" required value="{{ $konsumen->kode_konsumen }}">
             <div class="mb-3">
                 <label for="nama_konsumen" class="form-label">Nama Konsumen</label>
-                <input type="text" class="form-control" id="nama_konsumen" name="nama_konsumen" value="{{ $konsumen->nama_konsumen }}" required>
+                <input type="text" class="form-control" id="nama_konsumen" name="nama_konsumen" value="{{ $konsumen->nama }}" required>
             </div>
             <div class="mb-3">
                 <label for="wilayah_asal" class="form-label">Wilayah Asal</label>
-                <input type="text" class="form-control" id="wilayah_asal" name="wilayah_asal" value="{{ $konsumen->wilayah->nama_wilayah}}" readonly>
+                <input type="text" class="form-control" id="wilayah_asal" name="wilayah_asal" value=" 
+                    @foreach($wilayah as $w)
+                        @if($konsumen->wilayah == $w->kode_wilayah)
+                            {{$w->nama_wilayah}}
+                        @endif
+                    @endforeach" readonly>
             </div>
             <div class="mb-3">
                 <label for="nama_dosen" class="form-label">Wilayah</label>
@@ -49,10 +54,10 @@
             </div>
             <div class="mb-3">
                 <label for="no_telp" class="form-label">Foto KTP Lama</label>
-                <img width="150px" src="{{ url('upload/foto_ktp/'. $lokasiFile)}}">
+                <img width="150px" src="{{ url('upload/foto_ktp/'.  $konsumen->namaFileKtp)}}">
             <div class="mb-3">
                 <label for="namaFileKtp" class="form-label">Foto KTP Konsumen</label>
-                <input type="file" class="form-control" id="namaFileKtp" name="namaFileKtp" required>
+                <input type="file" class="form-control" id="namaFileKtp" name="namaFileKtp" value="{{ $konsumen->namaFileKtp }}" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

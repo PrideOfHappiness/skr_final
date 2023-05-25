@@ -22,11 +22,11 @@ class Konsumen extends Model
         'namaFileKtp',
     ];
 
-    public function wilayah(){
+    public function kode_wilayah(){
         return $this->belongsTo(Wilayah::class, "wilayah");
     }
 
-    public function konsumen_penjualan(){
+    public function penjualan(){
         return $this->hasMany(Penjualan::class, "kode_customer");
     }
 }

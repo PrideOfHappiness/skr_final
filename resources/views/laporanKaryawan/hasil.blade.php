@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"> 
+    <head> 
+        <title> Hasil Pencarian Data berdasarkan tanggal {{ $awal }} hingga {{ $akhir }} </title>
+        @include('template/header')
+    </head>
+    <body> 
+        @include('template/navbar')
+        @include('template/sidebarPemilik')
+
+        <section class="content"> 
+            <div class="container-fluid"> 
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title"> Hasil Pencarian Data Penjualan Berdasarkan Karyawan Terjual Dari Tanggal {{ $awal }} sampai Tanggal {{ $akhir }} </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                        <div class="card-body"><canvas id="grafikSPM1"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        @include('template/footer')
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+</html>
+
+<script>
+    //--GrafikSPM1 (Keluar Hasil SQL)
+    var chartDatas = JSON.parse('<?php echo $chart_data; ?>');
+    const data = {
+        labels: chartDatas.label,
+        datasets: [{
+            label: "Jumlah Karyawan terdaftar",
+            data: chartDatas.jumlah,
+            backgroundColor: [
+                'rgba(055, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+            }]
+    };
+
+    const configBar = {
+        type: 'bar',
+        data: data,
+        options:
+        {
+            maintainAspectRatio : true,
+            responsive : true,
+            cutoutPercentage: 80,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Nama Karyawan'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true, 
+                        text: 'Jumlah Data'
+                    }
+                }
+            }
+        }
+    };
+
+    const grafikSPM1 = new Chart(
+        document.getElementById('grafikSPM1'),
+        configBar
+    );
+</script>

@@ -18,8 +18,10 @@
             <thead>
             <tr>
                 <th>No.</th>
+                <th>Kode Konsumen</th>
                 <th>Konsumen</th>
                 <th>Kecamatan</th>
+                <th>Kab/Kota</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -28,8 +30,10 @@
                 @foreach ($konsumen as $kons)
                 <tr>
                     <td>{{ $i++ }} </td>
+                    <td>{{ $kons->kode_konsumen }}
                     <td>{{ $kons->nama }} </td>
                     <td>{{ $kons->kecamatan }} </td>
+                    <td>{{ $kons->kode_wilayah->nama_wilayah }}</td>
                     <td> 
                         <form action = "{{ route('konsumen.destroy', $kons->kode_konsumen) }}" method="Post">
                             <a class="badge bg-info" href="{{ route('konsumen.show', $kons->kode_konsumen)}}">Detail Konsumen</span></a>

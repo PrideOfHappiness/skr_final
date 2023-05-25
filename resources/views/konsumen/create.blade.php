@@ -17,10 +17,10 @@
             </div>
             <div class="mb-3">
                 <label for="nama_dosen" class="form-label">Wilayah</label>
-                <select name="kode_wilayah" id="kode_wilayah" class="form-control select2-multiple">
+                <select name="kode_wilayah" id="kode_wilayah" class="form-control select2-multiple" required>
                     <option value="">Silahkan pilih wilayah terlebih dahulu!</option>
                     @foreach($wilayah as $wyl)
-                        <option value="{{$wyl->kode_wilayah}}"> {{ $wyl->nama_wilayah }} </option>
+                        <option value="{{$wyl->id}}"> {{ $wyl->nama_wilayah }} </option>
                     @endforeach
                 </select>
             </div>

@@ -8,6 +8,9 @@ use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KonsumenController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\LaporanPenjualanController;
+use App\Http\Controllers\LaporanPenjualanKaryawanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,11 +49,17 @@ Route::middleware(['Admin'])->group(function() {
 Route::middleware(['Karyawan'])->group(function() {
     Route::get('/karyawan/home', [HomeController::class, 'karyawanHome'])->name('karyawanHome');
     Route::resource('/karyawan/konsumen', KonsumenController::class);
-    
+    Route::resource('/karyawan/penjualan', PenjualanController::class);
+    Route::get('penjualan/download/{no_fj}', [PenjualanController::class, 'download']);
+    Route::get('penjualan/export', [PenjualanController::class, 'export'])->name('exportPenjualan');
 });
 
 Route::middleware(['Pemilik'])->group(function() {
     Route::get('/pemilik/home', [HomeController::class, 'pemilikHome'])->name('pemilikHome');
+    Route::get('/pemilik//laporanPenjualan/sepedaMotor/ambilData', [LaporanPenjualanController::class, "pickData"])->name('ambilDataSPM');
+    Route::post('/pemilik/laporanPenjualan/sepedaMotor/proses', [LaporanPenjualanController::class, "prosesTanggalSepedaMotor"])->name("prosesSPM");
+    Route::get('/pemilik//laporanPenjualan/karyawan/ambilData', [LaporanPenjualanKaryawanController::class, "pickData"])->name('ambilDataKRY');
+    Route::post('/pemilik/laporanPenjualan/karyawan/proses', [LaporanPenjualanKaryawanController::class, "prosesTanggalKaryawan"])->name("prosesKRY");
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

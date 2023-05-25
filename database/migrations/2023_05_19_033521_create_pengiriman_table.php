@@ -14,19 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pengiriman', function (Blueprint $table) {
-            $table->string('surat_jalan')->primary();
-            $table->string('kode_customer');
-            $table->string('kode_wilayah');
+            $table->id();
+            $table->string('surat_jalan')->unique();
+            $table->bigInteger('kode_customer')->unsigned();
+            $table->bigInteger('kode_wilayah')->unsigned();
             $table->bigInteger('kode_karyawan_pengirim')->unsigned();
-            $table->string('nomor_rangka');
-            $table->string('perlengkapan');
+            $table->bigInteger('nomor_rangka')->unsigned();
+            $table->text('perlengkapan');
             $table->string('status');
             $table->timestamps();
 
-            $table->foreign('kode_customer')->references('kode_konsumen')->on('konsumen');
+            $table->foreign('kode_customer')->references('id')->on('konsumen');
             $table->foreign('kode_karyawan_pengirim')->references('id')->on('users');
-            $table->foreign('nomor_rangka')->references('nomor_rangka')->on('barang');
-            $table->foreign('kode_wilayah')->references('kode_wilayah')->on('wilayah');
+            $table->foreign('nomor_rangka')->references('id')->on('barang');
+            $table->foreign('kode_wilayah')->references('id')->on('wilayah');
         });
     }
 

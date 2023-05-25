@@ -21,6 +21,7 @@
                 <th>No.</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -31,6 +32,7 @@
                         <td> {{ $i++ }}</td>
                         <td> {{ $brg->kode_barang }}</td>
                         <td> {{ $brg->nama_barang }}</td>
+                        <td> {{ $brg->status}} </td>
                         <td> 
                             <a class="badge bg-info" href="{{ route('barang.show', $brg->kode_barang)}}">Detail</span></a>
                         </td>

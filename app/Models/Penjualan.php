@@ -10,6 +10,7 @@ class Penjualan extends Model
     use HasFactory;
 
     protected $table = 'penjualan';
+    
 
     protected $fillable = [
         'no_fj',
@@ -17,12 +18,13 @@ class Penjualan extends Model
         'kode_wilayah',
         'kode_gudang',
         'kode_karyawan',
-        'kode_barang',
+        'nomor_rangka',
         'dealer',
         'harga_terjual',
+        'jenis_bayar',
     ];
 
-    public function kode_customer(){
+    public function konsumen(){
         return $this->belongsTo(Konsumen::class, "kode_customer");
     }
 
@@ -34,11 +36,11 @@ class Penjualan extends Model
         return $this->belongsTo(Gudang::class, "kode_gudang");
     }
 
-    public function kode_karyawan(){
+    public function karyawan(){
         return $this->belongsTo(User::class, "kode_karyawan");
     }
 
-    public function kode_barang(){
-        return $this->belongsTo(Barang::class, "kode_barang");
+    public function barang(){
+        return $this->belongsTo(Barang::class, "nomor_rangka");
     }
 }

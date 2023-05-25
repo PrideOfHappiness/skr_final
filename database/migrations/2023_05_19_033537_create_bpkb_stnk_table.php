@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bpkb_stnk', function (Blueprint $table) {
-            $table->string('no_plat', 9)->primary();
-            $table->string('kode_customer');
-            $table->string('nomor_rangka');
+            $table->id();
+            $table->string('no_plat', 9)->unique();
+            $table->bigInteger('kode_customer')->unsigned();
+            $table->bigInteger('nomor_rangka')->unsigned();
             $table->string('nomor_bpkb', 10);
             $table->string('status_bpkb');
             $table->string('status_stnk_plat');
@@ -24,8 +25,8 @@ return new class extends Migration
             $table->datetime('tgl_ambil_bpkb');
             $table->timestamps();
 
-            $table->foreign('kode_customer')->references('kode_konsumen')->on('konsumen');
-            $table->foreign('nomor_rangka')->references('nomor_rangka')->on('barang');
+            $table->foreign('kode_customer')->references('id')->on('konsumen');
+            $table->foreign('nomor_rangka')->references('id')->on('barang');
         });
     }
 

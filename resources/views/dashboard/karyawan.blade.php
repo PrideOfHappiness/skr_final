@@ -7,4 +7,9 @@
 <body>
 @include('template/navbar')
 @include('template/sidebarKaryawan')
+<div class = "container"> 
+    
+</div>
 @include('template/footer')
+</body>
+</html>

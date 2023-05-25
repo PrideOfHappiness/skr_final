@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Models\Konsumen;
+use Illuminate\Support\Facades\DB;
 use App\Models\Wilayah;
 
 class KonsumenController extends Controller
@@ -15,19 +16,13 @@ class KonsumenController extends Controller
     }
 
     public function create(){
-        $wilayah = Wilayah::selectRaw("kode_wilayah, nama_wilayah, concat(wilayah.kode_wilayah, ' - ', wilayah.nama_wilayah) as 
+        $wilayah = Wilayah::selectRaw("id, kode_wilayah, nama_wilayah, concat(wilayah.kode_wilayah, ' - ', wilayah.nama_wilayah) as 
             wilayah")->get();
         return view('konsumen.create', compact('wilayah'));
     }
 
     public function store(Request $request){
         $this->validate($request, [
-            'nama_konsumen' => 'required',
-            'kode_wilayah' => 'required',
-            'alamat' => 'required',
-            'kecamatan' => 'required',
-            'no_ktp' => 'required',
-            'no_telp' => 'required',
             'namaFileKtp' => 'mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -57,50 +52,56 @@ class KonsumenController extends Controller
             ->with('success', 'Data Konsumen berhasil ditambahkan!');
     }
 
-    public function show($kode_konsumen){
-        $konsumen = Konsumen::where('kode_konsumen', $kode_konsumen)->first();
+    public function show($id){
+        $konsumen = Konsumen::find($id);
         return view('konsumen.show', compact('konsumen'));
     }
 
-    public function edit($kode_konsumen){
-        $konsumen = Konsumen::where('kode_konsumen', $kode_konsumen)->first();
+    public function edit($id){
+        $konsumen = Konsumen::find($id);
         return view('konsumen.edit', compact('konsumen'));
     }
 
-    public function update(Request $request, $kode_konsumen){
-        $konsumen = Konsumen::where('kode_konsumen', $kode_konsumen)->get('kode_konsumen');
+    public function update(Request $request){
+        $konsumen = Konsumen::find($id);
 
         $this->validate($request,[
+            'kode_konsumen' => 'required',
             'nama_konsumen' => 'required',
             'kode_wilayah' => 'required',
             'alamat' => 'required',
             'kecamatan' => 'required',
             'no_ktp' => 'required',
             'no_telp' => 'required',
-            'namaFileKtp' => 'required',
+            'namaFileKtp' => 'required|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         if($request->hasFile('namaFileKtp')){
-            $foto_ktp = $request->file('foto_ktp_konsumen');
-            $namaFileKtp = $foto_ktp->getClientOriginalName();
-            $foto_ktp->move('upload/foto_ktp/', $namaFileKtp);
+            $foto_ktp = $request->file('namaFileKtp');
+            $fileKtp = $foto_ktp->getClientOriginalName();
+            $foto_ktp->move('upload/foto_ktp/', $fileKtp);
         }
 
-        $konsumen->nama = $request->kode_konsumen;
-        $konsumen->wilayah = $request->kode_wilayah;
-        $konsumen->alamat = $request->alamat;
-        $konsumen->kecamatan = $request->kecamatan;
-        $konsumen->no_ktp = $request->no_ktp;
-        $konsumen->no_telp = $request->no_telp;
-        $konsumen->namaFileKtp = $request->namaFileKtp;
-        $konsumen->update();
-    }
-
-    public function destroy($kode_konsumen){
-        $konsumen = Konsumen::where('kode_konsumen', $kode_konsumen)->get();
-        $konsumen->delete();
+        $idkon->update([
+            'kode_konsumen' => $request->kode_konsumen,
+            'nama' => $request->nama_konsumen,
+            'wilayah' => $request->kode_wilayah,
+            'alamat' => $request->alamat,
+            'kecamatan' => $request->kecamatan,
+            'no_ktp' => $request->no_ktp,
+            'no_telp' => $request->no_telp,
+            'namaFileKtp' => $fileKtp,
+            ]);
 
         return redirect()->route('konsumen.index')
-            ->with('success', 'Data Konsumen Berhasil Dihapus!');
+            ->with('success', 'Data Konsumen Berhasil Diubah!');
+    }
+    
+        public function destroy($id){
+            $konsumen = Konsumen::find($id);
+            $konsumen->delete();
+
+            return redirect()->route('konsumen.index')
+                ->with('success', 'Data Konsumen Berhasil Dihapus!');
     }
 }

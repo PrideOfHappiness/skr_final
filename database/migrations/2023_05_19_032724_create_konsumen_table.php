@@ -14,17 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('konsumen', function (Blueprint $table) {
-            $table->string('kode_konsumen', 8)->unique();
+            $table->id();
+            $table->string('kode_konsumen', 8);
             $table->string('nama');
             $table->string('alamat');
             $table->string('kecamatan');
-            $table->string('wilayah');
+            $table->bigInteger('wilayah')->unsigned();
             $table->string('no_ktp', 16);
             $table->string('no_telp', 15);
             $table->string('namaFileKtp');
             $table->timestamps();
 
-            $table->foreign('wilayah')->references('kode_wilayah')->on('wilayah');
+            $table->foreign('wilayah')->references('id')->on('wilayah');
         });
     }
 

@@ -14,21 +14,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('penjualan', function (Blueprint $table) {
-            $table->string('no_fj', 17)->primary();
-            $table->string('kode_customer');
-            $table->string('kode_wilayah');
-            $table->string('kode_gudang');
+            $table->id();
+            $table->string('no_fj', 17);
+            $table->bigInteger('kode_customer')->unsigned();
+            $table->bigInteger('kode_wilayah')->unsigned();
+            $table->bigInteger('kode_gudang')->unsigned();
             $table->bigInteger('kode_karyawan')->unsigned();
-            $table->string('nomor_rangka');
+            $table->bigInteger('nomor_rangka')->unsigned();
             $table->string("dealer");
             $table->string('harga_terjual');
+            $table->string('jenis_bayar', 30);
             $table->timestamps();
 
-            $table->foreign('kode_customer')->references('kode_konsumen')->on('konsumen');
+            $table->foreign('kode_customer')->references('id')->on('konsumen');
             $table->foreign('kode_karyawan')->references('id')->on('users');
-            $table->foreign('nomor_rangka')->references('nomor_rangka')->on('barang');
-            $table->foreign('kode_gudang')->references('kode_gudang')->on('gudang');
-            $table->foreign('kode_wilayah')->references('kode_wilayah')->on('wilayah');
+            $table->foreign('nomor_rangka')->references('id')->on('barang');
+            $table->foreign('kode_gudang')->references('id')->on('gudang');
+            $table->foreign('kode_wilayah')->references('id')->on('wilayah');
         });
     }
 

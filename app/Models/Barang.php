@@ -22,7 +22,7 @@ class Barang extends Model
         'status',
     ];
 
-    public function barang_penjualan(){
+    public function penjualan(){
         return $this->hasMany(Penjualan::class, "kode_barang");
     }
 }

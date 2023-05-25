@@ -1,7 +1,7 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/dashboardKaryawan" class="brand-link">
+    <a href="{{ route('karyawanHome') }}" class="brand-link">
       <img src="{{ asset('style/dist/img/honda-logo-motorcycle-brand-png-16.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard Karyawan</span>
     </a>
@@ -11,7 +11,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info"> 
-          <a href="#" class="d-block">
+          <a href="{{ route('karyawanHome')}}" class="d-block">
             @auth
               {{ auth()->user()->nama_karyawan }}
             @endauth
@@ -33,7 +33,7 @@
                   </a>
             </li>
             <li class="nav-item"> 
-                <a href="#" class="nav-link">
+                <a href="/karyawan/penjualan" class="nav-link">
                   <i class="fa-solid fa-motorcycle"></i>
                     <p>
                       Penjualan Sepeda Motor

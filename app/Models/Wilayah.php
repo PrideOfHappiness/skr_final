@@ -16,7 +16,7 @@ class Wilayah extends Model
         'nama_wilayah',
     ];
     
-    public function wilayah_konsumen(){
+    public function konsumen(){
         return $this->hasMany(Konsumen::class, "wilayah");
     }
 
