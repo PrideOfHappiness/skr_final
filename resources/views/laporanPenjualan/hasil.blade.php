@@ -8,25 +8,29 @@
         @include('template/navbar')
         @include('template/sidebarPemilik')
 
-        <section class="content"> 
-            <div class="container-fluid"> 
-                <div class="card card-default">
-                    <div class="card-header">
-                        <h3 class="card-title"> Hasil Pencarian Data Sepeda Motor Terjual Dari Tanggal {{ $awal }} sampai Tanggal {{ $akhir }} </h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
+        <div class="container">
+            <div class="mt-4">
+                <section class="content"> 
+                    <div class="container-fluid"> 
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"> Hasil Pencarian Data Sepeda Motor Terjual Dari Tanggal {{ $awal }} sampai Tanggal {{ $akhir }} </h3>
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                                <div class="card-body"><canvas id="grafikSPM1"></canvas>
+                            </div>
                         </div>
                     </div>
-                        <div class="card-body"><canvas id="grafikSPM1"></canvas>
-                    </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
         @include('template/footer')
         <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

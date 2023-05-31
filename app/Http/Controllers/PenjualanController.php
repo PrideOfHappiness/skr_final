@@ -41,6 +41,7 @@ class PenjualanController extends Controller
         $bulanSekarang = $tahunIni->month;
         $kode_dealer = $request->kode_dealer;
         $nomorFJ = 'FJ-'. $kode_dealer . '-'. $tahunSekarang . '-'. $bulanSekarang . '-' . str_pad($increments, 4, '0', STR_PAD_LEFT); 
+        $barang = Barang::find($request->nomor_rangka);
         
         $penjualan = Penjualan::create([
             'no_fj' => $nomorFJ,
@@ -54,12 +55,18 @@ class PenjualanController extends Controller
             'jenis_bayar' => $request->jenis_bayar,
         ]);
 
+        if($barang){
+            $barang->status = "TERJUAL";
+            $barang->save();
+        }
+        
         return redirect()->route('penjualan.index')
             ->with('success', 'Data Penjualan berhasil ditambahkan!'); 
     }
 
     public function download($id){
         $penjualan = Penjualan::find($id);
+        $no_fj = Penjualan::find($id)->get('no_fj');
         $pdf = PDF::loadView('penjualan.fj', ['dataPenjualan' => $penjualan]);
         return $pdf->download('Faktur Jual' . $no_fj . '.pdf');
     }

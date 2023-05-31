@@ -41,4 +41,8 @@ class HomeController extends Controller
         return view('dashboard.pemilik');
     }
 
+    public function karyawanPengirimHome(){
+        return view('dashboard.karyawanPengirim');
+    }
+
 }

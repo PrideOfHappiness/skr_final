@@ -46,6 +46,16 @@ class UserSeeder extends Seeder
             'password' => bcrypt('pemilik123'),
             'email' => 'margakartika369@gmail.com'
             ],
+            [
+            'kode_karyawan' => 'KP000001',
+            'nama_karyawan' => 'Test Karyawan Pengirim 1',
+            'alamat' => 'Jl. Hayam Wuruk 108 Tanggung, Wlingi, Blitar',
+            'gender' => 'L',
+            'status' => 'Karyawan Pengirim',
+            'no_telp' => '085700088832',
+            'password' => bcrypt('karyawanpengirim123'),
+            'email' => 'margakartika258@gmail.com'
+            ],
         ];
 
         foreach($karyawan as $key=>$user){

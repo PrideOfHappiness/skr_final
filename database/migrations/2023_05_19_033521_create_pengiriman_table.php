@@ -16,18 +16,17 @@ return new class extends Migration
         Schema::create('pengiriman', function (Blueprint $table) {
             $table->id();
             $table->string('surat_jalan')->unique();
-            $table->bigInteger('kode_customer')->unsigned();
-            $table->bigInteger('kode_wilayah')->unsigned();
-            $table->bigInteger('kode_karyawan_pengirim')->unsigned();
-            $table->bigInteger('nomor_rangka')->unsigned();
+            $table->bigInteger('no_fj')->unsigned();
+            $table->bigInteger('karyawan_pengirim')->unsigned();
             $table->text('perlengkapan');
-            $table->string('status');
+            $table->enum('status', ['PDI', 'Barang Sedang Dikirim', 'Selesai']);
+            $table->timestamp('pdi_datetime')->nullable();
+            $table->timestamp('shipping_datetime')->nullable();
+            $table->timestamp('selesai_datetime')->nullable();
             $table->timestamps();
 
-            $table->foreign('kode_customer')->references('id')->on('konsumen');
-            $table->foreign('kode_karyawan_pengirim')->references('id')->on('users');
-            $table->foreign('nomor_rangka')->references('id')->on('barang');
-            $table->foreign('kode_wilayah')->references('id')->on('wilayah');
+            $table->foreign('no_fj')->references('id')->on('penjualan');
+            $table->foreign('karyawan_pengirim')->references('id')->on('users');
         });
     }
 

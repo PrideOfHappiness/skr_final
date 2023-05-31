@@ -49,6 +49,8 @@ class LoginController extends Controller
                 return redirect()->route('karyawanHome');
             }else if(Auth::user()->status == "Pemilik"){
                 return redirect()->route('pemilikHome');
+            }else if(Auth::user()->status == "Karyawan Pengirim"){
+                return redirect()->route('karyawanPengirimHome');
             }else{
                 return redirect()->route('home');
             }

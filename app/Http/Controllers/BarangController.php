@@ -10,8 +10,18 @@ use Maatwebsite\Excel\Facades\Excel;
 class BarangController extends Controller
 {
     public function index(){
-        $barang = Barang::paginate(20);
+        $barang = Barang::where('status', 'Tersedia')->paginate(20);
         return view('barang.index', compact('barang'));
+    }
+
+    public function indexAll(){
+        $barang = Barang::paginate(20);
+        return view('barang.indexAll', compact('barang'));
+    }
+
+    public function indexKaryawan(){
+        $barang = Barang::where('status', 'Tersedia')->paginate(20);
+        return view('barang.indexKaryawan', compact('barang'));
     }
 
     public function create(){

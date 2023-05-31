@@ -8,15 +8,19 @@
     @include('template/navbar')
     @include('template/sidebarAdmin')
 
-    <section class="content"> 
-        <form action={{ route('wilayah.store') }} method="post"> 
-            @csrf
-            <div class="mb-3">
-                <label for="nama_wilayah" class="form-label">Nama Wilayah</label>
-                <input type="text" class="form-control" id="nama_wilayah" name="nama_wilayah" placeholder="Nama Wilayah" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </section>
+    <div class="container"> 
+        <div class="mt-4"> 
+            <section class="content"> 
+                <form action={{ route('wilayah.store') }} method="post"> 
+                    @csrf
+                    <div class="mb-3">
+                        <label for="nama_wilayah" class="form-label">Nama Wilayah</label>
+                        <input type="text" class="form-control" id="nama_wilayah" name="nama_wilayah" placeholder="Nama Wilayah" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </section>
+        </div>
+    </div>
     @include('template/footer')
 </body>

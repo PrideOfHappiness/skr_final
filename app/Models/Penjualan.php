@@ -11,7 +11,6 @@ class Penjualan extends Model
 
     protected $table = 'penjualan';
     
-
     protected $fillable = [
         'no_fj',
         'kode_customer',

@@ -6,18 +6,12 @@
 </head>
 <body>
     @include('template/navbar')
-    @include('template/sidebarAdmin')
+    @include('template/sidebarKaryawan')
 
     <div class="container"> 
         <div class="mt-4"> 
             <section class="content"> 
-                <br>
-                <div class = "pull-right mb-2" class = "wrapper">
-                    <a class="btn btn-primary" href="/barang/allData"> Lihat Seluruh Barang</a>
-                    <a class="btn btn-primary" href="{{ route('barang.create') }}"> Tambah Data Barang</a>
-                    <a class="btn btn-info" href="/barang/imporData"> Impor Data Barang</a>
-                </div>
-        
+                
                 <table class="table">
                     <thead>
                     <tr>

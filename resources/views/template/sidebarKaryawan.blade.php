@@ -23,10 +23,20 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2"> 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-header">Fungsi-fungsi Sistem</li>
+          <li class="nav-header">Barang Tersedia</li>
+          <li class="nav-item"> 
+              <a href="/karyawan/barangTersedia" class="nav-link">
+                <i class="fa-solid fa-motorcycle"></i>
+                  <p>
+                    Barang Tersedia
+                  </p>
+                </a>
+          </li>
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-header">Input Data</li>
             <li class="nav-item"> 
                 <a href="/karyawan/konsumen" class="nav-link">
-                  <i class="fa-solid fa-person-biking"></i>
+                  <i class="fa-solid fa-person"></i>
                     <p>
                       Konsumen
                     </p>
@@ -41,18 +51,10 @@
                   </a>
             </li>
             <li class="nav-item"> 
-                <a href="#" class="nav-link">
+                <a href="/karyawan/pengiriman" class="nav-link">
                   <i class="fa-solid fa-truck-fast"></i>
                     <p>
                       Pengiriman
-                    </p>
-                  </a>
-            </li>
-            <li class="nav-item"> 
-                <a href="#" class="nav-link">
-                  <i class="fa-solid fa-coins"></i>
-                    <p>
-                      Finance Konsumen
                     </p>
                   </a>
             </li>
