@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('jenis');
             $table->string('warna');
             $table->string('tahun_rakit');
-            $table->string('status');
+            $table->enum('status', ['TERSEDIA', 'TERJUAL']);
             $table->timestamps();
         });
     }
