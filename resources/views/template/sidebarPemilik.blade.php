@@ -25,7 +25,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-header">Fungsi-fungsi Sistem</li>
             <li class="nav-item"> 
-                <a href="#" class="nav-link">
+                <a href="{{ route('ambilTglRekapPjl')}}" class="nav-link">
                   <i class="fa-solid fa-table"></i>
                     <p>
                       Rekap Penjualan
@@ -33,7 +33,7 @@
                   </a>
             </li>
             <li class="nav-item"> 
-                <a href="#" class="nav-link">
+                <a href="{{ route('ambilTglRekapPgr')}}" class="nav-link">
                   <i class="fa-solid fa-table"></i>
                     <p>
                       Rekap Pengiriman

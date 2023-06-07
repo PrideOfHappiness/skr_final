@@ -16,17 +16,22 @@ return new class extends Migration
         Schema::create('bpkb_stnk', function (Blueprint $table) {
             $table->id();
             $table->string('no_plat', 9)->unique();
-            $table->bigInteger('kode_customer')->unsigned();
-            $table->bigInteger('nomor_rangka')->unsigned();
-            $table->string('nomor_bpkb', 10);
-            $table->string('status_bpkb');
-            $table->string('status_stnk_plat');
-            $table->datetime('tgl_ambil_stnk_plat');
-            $table->datetime('tgl_ambil_bpkb');
+            $table->bigInteger('no_fj')->unsigned();
+            $table->string('nomor_bpkb', 10)->nullable();
+            $table->enum('status_bpkb', ['Sedang diadministrasikan', 'Selesai', 'Sudah diambil']);
+            $table->enum('status_stnk_plat', ['Sedang diadministrasikan', 'Selesai', 'Sudah diambil']);
+            $table->string('nama_pengambil_stnk')->nullable();
+            $table->string('ktp_pengambil_stnk', 16)->nullable();
+            $table->string('alamat_pengambil_stnk')->nullable();
+            $table->timestamp('tgl_ambil_stnk_plat')->nullable();
+            $table->timestamp('tgl_ambil_bpkb')->nullable();
+            $table->bigInteger('karyawan_cetak_surat_bpkb')->unsigned()->nullable();
+            $table->bigInteger('karyawan_cetak_surat_stnk')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('kode_customer')->references('id')->on('konsumen');
-            $table->foreign('nomor_rangka')->references('id')->on('barang');
+            $table->foreign('no_fj')->references('id')->on('penjualan');
+            $table->foreign('karyawan_cetak_surat_bpkb')->references('id')->on('users');
+            $table->foreign('karyawan_cetak_surat_stnk')->references('id')->on('users');
         });
     }
 

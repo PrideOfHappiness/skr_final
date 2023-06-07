@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use DateTime;
 
 class Pengiriman extends Model
 {
@@ -22,34 +23,40 @@ class Pengiriman extends Model
         'selesai_datetime',
     ];
 
-    public function no_fj(){
+    public function fj(){
         return $this->belongsTo(Penjualan::class, "no_fj");
     }
 
-    public function karyawan_pengirim(){
+    public function pengirim(){
         return $this->belongsTo(User::class, "karyawan_pengirim");
     }
 
     public function getPDIShippingAttribute(){
         if($this->pdi_datetime && $this->shipping_datetime){
-            return $this->pdi_datetime->diff($this->shipping_datetime);
+            $processedDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->pdi_datetime);
+            $shippedDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->shipping_datetime);
+
+            $durasi = $processedDateTime->diff($shippedDateTime);
 
             $jam = $durasi->h;
             $menit = $durasi->i;
 
-            return $jam . 'jam' . $menit . 'menit';
+            return $jam . ' jam' . $menit . ' menit';
         }
         return null;
     }
 
     public function getShippingSelesaiAttribute(){
         if($this->shipping_datetime && $this->selesai_datetime){
-            $durasi = $this->shipping_datetime->diff($this->selesai_datetime);
+            $processedDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->shipping_datetime);
+            $shippedDateTime = DateTime::createFromFormat('Y-m-d H:i:s', $this->selesai_datetime);
+
+            $durasi = $processedDateTime->diff($shippedDateTime);
 
             $jam = $durasi->h;
             $menit = $durasi->i;
 
-            return $jam . 'jam' . $menit . 'menit';
+            return $jam . ' jam ' . '  ' . $menit . ' menit';
         }
         return null;
     }

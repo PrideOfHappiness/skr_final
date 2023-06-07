@@ -36,16 +36,21 @@
                         <tr>
                             <td>{{ $i++ }} </td>
                             <td>{{ $penjualan->surat_jalan }}
-                            <td>{{ $penjualan->no_fj->konsumen->nama }} </td>
-                            <td>{{ $penjualan->no_fj->barang->nama_barang }} </td>
-                            <td>{{ $penjualan->karyawan_pengirim->nama_karyawan }}</td>
+                            <td>{{ $penjualan->fj->konsumen->nama }} </td>
+                            <td>{{ $penjualan->fj->barang->nama_barang }} </td>
+                            <td>{{ $penjualan->pengirim->nama_karyawan }}</td>
                             <td>{{ $penjualan->status }} </td>
                             <td>{{ $penjualan->created_at }}</td>
-                            <td>{{ $penjualan->history_updated_at}}</td>
+                            <td>{{ $penjualan->updated_at}}</td>
                             <td> 
-                                <a class="badge bg-info" href="{{ route('penjualan.show', $penjualan->id)}}">Detail Pengiriman</span></a>
-                                <a class="badge bg-warning" href="/penjualan/{{ $penjualan->id}}/downloadSJ">Download Surat Jalan</span></a>
-                                <a class="badge bg-warning" href="/penjualan/{{ $penjualan->id}}/ubahStatusPengiriman">Ubah Status Menjadi Pengiriman</span></a>
+                                <form action = "{{ route('pengiriman.destroy', $penjualan->id) }}" method="Post">
+                                    <a class="badge bg-info" href="{{ route('pengiriman.show', $penjualan->id)}}">Detail Pengiriman</span></a>
+                                    <a class="badge bg-warning" href="/pengiriman/{{ $penjualan->id}}/downloadSJ">Download Surat Jalan</span></a>
+                                    <a class="badge bg-warning" href="/pengiriman/{{ $penjualan->id}}/ubahStatusPengiriman">Ubah Status Menjadi Pengiriman</span></a>
+                                    @csrf
+                                        @method("DELETE")
+                                            <button type="submit" class="badge bg-danger"> Hapus Data Pengiriman Ini</button>
+                                </form>
                             </td>
                         @endforeach
                     </tbody>

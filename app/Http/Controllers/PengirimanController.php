@@ -32,20 +32,20 @@ class PengirimanController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'penjualan' => 'required',
-            'karyawan_pengirim' => 'required',
+            'pengirim' => 'required',
             'perlengkapan' => 'required',
         ]);
 
         $i = 1;
         $increments = $i++;
         $tahun = date('Y');
-        $suratJalan = 'SJ-'. $tahun . $increments;
+        $suratJalan = 'SJ-'. $tahun . '-' . $increments;
         $carbon = Carbon::now();
 
         $pengiriman = Pengiriman::create([
             'surat_jalan' => $suratJalan,
             'no_fj' => $request->penjualan,
-            'karyawan_pengirim' -> $request->karyawan_pengirim,
+            'karyawan_pengirim' => $request->pengirim,
             'perlengkapan' => $request->perlengkapan,
             'status' => 'PDI',
             'pdi_datetime' => $carbon,
@@ -68,11 +68,23 @@ class PengirimanController extends Controller
 
     public function ubahPengiriman($id){
         $pengiriman = Pengiriman::find($id);
-        $pengiriman->status = "Barang Sedang Dikirim";
-        $pengiriman->shipping_datetime = now();
-        $pengiriman->save();
+        if($pengiriman->shipping_datetime){
+            return redirect()->route('pengiriman.index');
+        }else{
+            $pengiriman->status = "Barang Sedang Dikirim";
+            $pengiriman->shipping_datetime = now();
+            $pengiriman->save();
+
+            return redirect()->route('pengiriman.index')
+                ->with('success', 'Status Pengiriman berhasil diubah menjadi sedang dikirim!');
+        }
+    }
+
+    public function destroy($id){
+        $pengiriman = Pengiriman::find($id);
+        $pengiriman->delete();
 
         return redirect()->route('pengiriman.index')
-            ->with('success', 'Status Pengiriman berhasil diubah menjadi sedang dikirim!');
+            ->with('success', 'Data Pengiriman Berhasil Dihapus!');
     }
 }

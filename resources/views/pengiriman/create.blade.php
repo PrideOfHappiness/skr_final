@@ -23,8 +23,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="karyawan_pengirim" class="form-label">Nama Karyawan Yang Mengirim</label>
-                        <select name="karyawan_pengirim" id="karyawan_pengirim">
+                        <label for="pengirim" class="form-label">Nama Karyawan Yang Mengirim</label>
+                        <select name="pengirim" id="pengirim">
                             <option value=""> Silahkan Pilih Karyawan terlebih dahulu! </option>
                             @foreach($karyawan as $kry)
                                 <option value="{{ $kry->id }}"> {{ $kry->karyawan }} </option>

@@ -25,7 +25,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-header">Fungsi-fungsi Sistem</li>
             <li class="nav-item"> 
-                <a href="#" class="nav-link">
+                <a href="/karyawanPengirim/pengiriman" class="nav-link">
                   <i class="fa-solid fa-person"></i>
                     <p>
                       Data Pengiriman

@@ -50,4 +50,16 @@ class User extends Authenticatable
     public function karyawan_penjualan(){
         return $this->hasMany(Penjualan::class, "kode_karyawan");
     }
+
+    public function karyawan_pengiriman(){
+        return $this->hasMany(Pengiriman::class, "karyawan_pengirim");
+    }
+
+    public function karyawan_bpkb(){
+        return $this->hasMany(Bpkb_Stnk::class, "karyawan_cetak_surat_bpkb");
+    }
+
+    public function karyawan_stnk(){
+        return $this->hasMany(Bpkb_Stnk::class, "karyawan_cetak_surat_stnk");
+    }
 }

@@ -59,7 +59,9 @@ class KonsumenController extends Controller
 
     public function edit($id){
         $konsumen = Konsumen::find($id);
-        return view('konsumen.edit', compact('konsumen'));
+        $wilayah = Wilayah::selectRaw("id, kode_wilayah, nama_wilayah, concat(wilayah.kode_wilayah, ' - ', wilayah.nama_wilayah) as 
+            wilayah")->get();
+        return view('konsumen.edit', compact('konsumen', 'wilayah'));
     }
 
     public function update(Request $request){

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('template/header')
-    <title>Tambah Data Wilayah</title>
+    <title>Lihat Data Wilayah</title>
 </head>
 <body>
     @include('template/navbar')

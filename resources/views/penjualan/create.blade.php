@@ -17,7 +17,7 @@
                     <br>
                     <div class="mb-3">
                         <label for="kode_konsumen" class="form-label">Nama Konsumen</label>
-                        <select name="kode_konsumen" id="kode_konsumen">
+                        <select name="kode_konsumen" id="kode_konsumen" class="form-control select2bs4">
                             <option value=""> Silahkan Pilih Konsumen terlebih dahulu! </option>
                             @foreach($konsumen as $kons)
                                 <option value="{{ $kons->id }}"> {{ $kons->nama }} </option>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="kode_wilayah" class="form-label">Wilayah</label>
-                        <select name="kode_wilayah" id="kode_wilayah">
+                        <select name="kode_wilayah" id="kode_wilayah" class="form-control select2bs4">
                             <option value=""> Silahkan Pilih Wilayah terlebih dahulu! </option>
                             @foreach($wilayah as $wyl)
                                 <option value="{{ $wyl->id }}"> {{ $wyl->nama_wilayah }} </option>
@@ -37,7 +37,7 @@
                     <br>
                     <div class="mb-3">
                         <label for="kode_gudang" class="form-label">Gudang</label>
-                        <select name="kode_gudang" id="kode_gudang">
+                        <select name="kode_gudang" id="kode_gudang" class="form-control select2bs4">
                             <option value=""> Silahkan Pilih Gudang terlebih dahulu! </option>
                             @foreach($gudang as $gdg)
                                 <option value="{{ $gdg->id }}"> {{ $gdg->nama_gudang }} </option>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="nomor_rangka" class="form-label">Sepeda Motor</label>
-                        <select name="nomor_rangka" id="nomor_rangka">
+                        <select name="nomor_rangka" id="nomor_rangka" class="js-example-basic-single form-control">
                             <option value=""> Silahkan Pilih Sepeda Motor terlebih dahulu! </option>
                             @foreach($barang as $brg)
                                 <option value="{{ $brg->id }}"> {{ $brg->barang_dijual }} </option>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="jenis_bayar" class="form-label">Jenis Bayar</label>
-                        <select name="jenis_bayar" id="jenis_bayar">
+                        <select name="jenis_bayar" id="jenis_bayar" class="js-example-basic-single form-control">
                             <option value=""> Silahkan Pilih Jenis Bayar terlebih dahulu! </option>
                             <option value="Tunai"> Tunai </option>
                             <option value="Tunai Kredit"> Kredit Dealer </option>
@@ -70,18 +70,11 @@
                     <br>
                     <div class="mb-3">
                         <label for="kode_karyawan" class="form-label">Karyawan Penjual</label>
-                        <select name="kode_karyawan" id="kode_karyawan">
+                        <select name="kode_karyawan" id="kode_karyawan" class="js-example-basic-single form-control">
                             <option value=""> Silahkan Pilih Karyawan terlebih dahulu! </option>
                             @foreach($karyawan as $kry)
                                 <option value="{{ $kry->id }}"> {{ $kry->karyawan }} </option>
                             @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="kode_dealer" class="form-label">Dealer</label>
-                        <select name="kode_dealer" id="kode_dealer">
-                            <option value=""> Silahkan Pilih Konsumen terlebih dahulu! </option>
-                            <option value="MKM"> Marga Kartika Motor </option>
                         </select>
                     </div>
                     <br>

@@ -27,11 +27,11 @@ class Penjualan extends Model
         return $this->belongsTo(Konsumen::class, "kode_customer");
     }
 
-    public function kode_wilayah(){
+    public function wilayah(){
         return $this->belongsTo(Wilayah::class, "kode_wilayah");
     }
 
-    public function kode_gudang(){
+    public function gudang(){
         return $this->belongsTo(Gudang::class, "kode_gudang");
     }
 
@@ -41,5 +41,13 @@ class Penjualan extends Model
 
     public function barang(){
         return $this->belongsTo(Barang::class, "nomor_rangka");
+    }
+
+    public function pengiriman_penjualan(){
+        return $this->hasMany(Pengiriman::class, "no_fj");
+    }
+
+    public function bpkb_stnk(){
+        return $this->hasMany(Bpkb_Stnk::class, "no_fj");
     }
 }

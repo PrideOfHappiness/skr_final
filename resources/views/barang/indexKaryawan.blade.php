@@ -11,11 +11,25 @@
     <div class="container"> 
         <div class="mt-4"> 
             <section class="content"> 
-                
+                <div class = "pull-right mb-2" class="wrapper"> 
+                    <form action="{{ route('filterKry')}}" method="post"> 
+                        @csrf
+                        <select name="kategori" id="kategori" lass="js-example-basic-single form-control"> 
+                            <option value=""> Silahkan pilih kategori sepeda motor terlebih dahulu! </option>
+                            <option value="MATIC"> Matic / Scooter </option>
+                            <option value="CUB"> Bebek / Cub </option>
+                            <option value="SPORT"> Sport </option>
+                            <option value="ADVENTURE"> Adventure </option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </form>
+                </div>
+
                 <table class="table">
                     <thead>
                     <tr>
                         <th>No.</th>
+                        <th>Nomor Rangka
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Status</th>
@@ -27,11 +41,12 @@
                         @foreach ($barang as $brg)
                             <tr> 
                                 <td> {{ $i++ }}</td>
+                                <td> {{ $brg->nomor_rangka }}</td>
                                 <td> {{ $brg->kode_barang }}</td>
                                 <td> {{ $brg->nama_barang }}</td>
                                 <td> {{ $brg->status}} </td>
                                 <td> 
-                                    <a class="badge bg-info" href="{{ route('barang.show', $brg->kode_barang)}}">Detail</span></a>
+                                    <a class="badge bg-info" href="/karyawan/barangTersedia/{{$brg->id}}">Detail</span></a>
                                 </td>
                             </tr>
                         @endforeach

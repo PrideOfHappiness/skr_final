@@ -2,21 +2,15 @@
 <html lang="en">
 <head>
     @include('template/header')
-    <title>Data Penjualan</title>
+    <title>Rekap Data Penjualan</title>
 </head>
 <body>
     @include('template/navbar')
-    @include('template/sidebarKaryawan')
+    @include('template/sidebarPemilik')
 
     <div class="container"> 
         <div class="mt-4"> 
             <section class= "content"> 
-                <div class= "container-fluid"> 
-                    <br>
-                <div class = "pull-right mb-2">
-                    <a class="btn btn-success" href="{{ route('penjualan.create') }}"> Tambah Penjualan</a>
-                </div>
-        
                 <table class="table">
                     <thead>
                         <tr>
@@ -25,22 +19,17 @@
                             <th>Nama Konsumen</th>
                             <th>Sepeda Motor</th>
                             <th>Tanggal Buat Penjualan</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>  
                         @php $i = 1; @endphp
-                        @foreach ($dataPenjualan as $penjualan)
+                        @foreach ($data as $penjualan)
                         <tr>
                             <td>{{ $i++ }} </td>
                             <td>{{ $penjualan->no_fj }}
                             <td>{{ $penjualan->konsumen->nama }} </td>
                             <td>{{ $penjualan->barang->nama_barang }} </td>
                             <th>{{ $penjualan->created_at }}
-                            <td> 
-                                <a class="badge bg-info" href="{{ route('penjualan.show', $penjualan->id)}}">Detail Penjualan</span></a>
-                                <a class="badge bg-warning" href="/penjualan/{{$penjualan->id}}/downloadFJ">Download FJ</span></a>
-                            </td>
                         @endforeach
                     </tbody>
                 </table>
@@ -50,3 +39,4 @@
     </div>
     @include('template/footer')
 </body>
+</html>

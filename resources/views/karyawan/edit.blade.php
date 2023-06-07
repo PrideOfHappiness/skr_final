@@ -33,13 +33,10 @@
                         <input type="text" class="form-control" id="gender" name="gender" value="{{ $karyawan->gender }}" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="gender" class="form-label">Jabatan Awal</label>
-                        <input type="text" class="form-control" id="status_awal" name="status_awal" value= "{{ $karyawan->status }}" readonly>
-                    </div>
-                    <div class="mb-3">
                         <label for="status" class="form-label">Jabatan</label>
                         <select name="status" id="status" class="form-control select2-multiple">
                             <option value="">Silahkan pilih jabatan terlebih dahulu!</option>
+                            <option value={{ $karyawan->status}}>{{ $karyawan->status}}</option>
                             <option value="Karyawan"> Karyawan </option>
                             <option value="Admin"> Admin </option>
                             <option value="Pemilik"> Pemilik </option>

@@ -9,11 +9,11 @@ use App\Models\Gudang;
 use App\Models\Barang;
 use App\Models\Konsumen;
 use App\Models\Penjualan;
-use App\Exports\ExportPenjualan;
 use Carbon\Carbon;
 use Validator;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
+use DB;
 
 class PenjualanController extends Controller
 {
@@ -24,8 +24,9 @@ class PenjualanController extends Controller
 
     public function create(){
         $konsumen = Konsumen::selectRaw("id, kode_konsumen, nama")->get();
-        $barang = Barang::selectRaw("id, nomor_rangka, nama_barang, concat(barang.nomor_rangka, '-', barang.nama_barang) 
-            as barang_dijual")->get();
+        $barang = Barang::where('status', 'TERSEDIA')
+            ->selectRaw("id, nomor_rangka, nama_barang, warna, concat(barang.nomor_rangka, '-', barang.nama_barang, 
+            '-', barang.warna) as barang_dijual")->get();
         $wilayah = Wilayah::selectRaw("id, kode_wilayah, nama_wilayah")->get();
         $gudang = Gudang::selectRaw("id, kode_gudang, nama_gudang")->get();
         $karyawan = User::selectRaw("id, kode_karyawan, nama_karyawan, concat(users.kode_karyawan, ' - ', users.nama_karyawan) as 
@@ -34,11 +35,11 @@ class PenjualanController extends Controller
     }
 
     public function store(Request $request){
-        $i = 1;
-        $increments = $i++;
+        $i = 0001;
+        $increments = ++$i;
         $tahunIni = Carbon::now();
         $tahunSekarang = date('y');
-        $bulanSekarang = $tahunIni->month;
+        $bulanSekarang = date('m');
         $kode_dealer = $request->kode_dealer;
         $nomorFJ = 'FJ-'. $kode_dealer . '-'. $tahunSekarang . '-'. $bulanSekarang . '-' . str_pad($increments, 4, '0', STR_PAD_LEFT); 
         $barang = Barang::find($request->nomor_rangka);
@@ -54,6 +55,7 @@ class PenjualanController extends Controller
             'harga_terjual' => $request->harga,
             'jenis_bayar' => $request->jenis_bayar,
         ]);
+    
 
         if($barang){
             $barang->status = "TERJUAL";
@@ -62,7 +64,7 @@ class PenjualanController extends Controller
         
         return redirect()->route('penjualan.index')
             ->with('success', 'Data Penjualan berhasil ditambahkan!'); 
-    }
+        }
 
     public function download($id){
         $penjualan = Penjualan::find($id);
@@ -71,13 +73,15 @@ class PenjualanController extends Controller
         return $pdf->download('Faktur Jual' . $no_fj . '.pdf');
     }
 
-    public function show($no_fj){
+    public function show($id){
         $penjualan = Penjualan::find($id);
         return view('penjualan.show', compact('penjualan'));
     }
 
-    public function exportPenjualan(Request $request){
-        return Excel::download(new ExportPenjualan, 'penjualan.xlsx');
+    public function filter(Request $request){
+        $hasil = Penjualan::join('barang', 'penjualan.nomor_rangka', '=', 'barang.id')
+            ->where('barang.nama_barang', 'like', '%' . $request->input('name') . '%')->get();
+        
+            return view('penjualan.hasil', ['dataPenjualan' => $hasil]);
     }
-
 }

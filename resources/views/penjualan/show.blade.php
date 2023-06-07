@@ -25,7 +25,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="kecamatan" class="form-label">Gudang Sepeda Motor Diambil</label>
-                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ $penjualan->kode_gudang->kecamatan }}" readonly>
+                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ $penjualan->konsumen->kecamatan }}" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="no_ktp" class="form-label">Sepeda Motor Terjual</label>
@@ -46,5 +46,6 @@
             </section>
         </div>
     </div>
+    @include('template/footer')
 </body>
 </html>

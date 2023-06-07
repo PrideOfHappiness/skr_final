@@ -10,7 +10,7 @@ use Auth;
 class PengirimanKaryawanController extends Controller
 {
     public function index(){
-        $pengirimanKaryawan = Pengiriman::where('karyawan_pengirim', Auth::id())->paginate(10);
+        $pengirimanKaryawan = Pengiriman::where('karyawan_pengirim', Auth::id())->where('status', '!=', 'Selesai')->paginate(10);
         return view('pengirimanKaryawan.index', compact('pengirimanKaryawan'));
     }
 
@@ -21,11 +21,14 @@ class PengirimanKaryawanController extends Controller
 
     public function selesai($id){
         $pengirimanKaryawan = Pengiriman::find($id);
-        $pengirimanKaryawan->status = "Selesai";
-        $pengirimanKaryawan->shipping_datetime = now();
-        $pengirimanKaryawan->save();
-
-        return redirect()->route('pengirimanKaryawan.index')
-            ->with('success', 'Status Pengiriman berhasil diubah menjadi selesai!');
+        if($pengirimanKaryawan->selesai_datetime){
+            return redirect('/karyawanPengirim/pengiriman');    
+        }else{
+            $pengirimanKaryawan->status = "Selesai";
+            $pengirimanKaryawan->selesai_datetime = now();
+            $pengirimanKaryawan->save();
+            return redirect('/karyawanPengirim/pengiriman')
+                ->with('success', 'Status Pengiriman berhasil diubah menjadi selesai!');
+        }
     }
 }

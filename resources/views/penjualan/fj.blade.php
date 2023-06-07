@@ -32,19 +32,20 @@
             background-color: #f2f2f2;
         }
     </style>
+    @php use Carbon\Carbon; @endphp
 </head>
 <body>
-    <h2>PT. Marga Kartika Motor</h2>
-    <h3>Dealer Resmi Motor Honda</h3>
+    <p>PT. Marga Kartika Motor</p>
+    <p>Dealer Resmi Motor Honda</p>
 
     <div class="center-align"> 
-        <h6>Tanda Terima Uang Sementara</h6>
-        <h6>{{ $dataPenjualan->no_fj }}</h6>
+        <p>Tanda Terima Uang Sementara</p>
+        <p>{{ $dataPenjualan->no_fj }}</p>
     </div>
     <br>
-    <h6>Telah terima dari : {{ $dataPenjualan->konsumen->nama}} </h6>
-    <h6>Jumlah sebesar    : {{ $dataPenjualan->harga_terjual }} </h6>
-    <h6>Titipan uang ke 1 untuk pembelian {{ $dataPenjualan->jenis_bayar }} sepeda motor baru di bawah ini:</h6>
+    <p>Telah terima dari : {{ $dataPenjualan->konsumen->nama}} </p>
+    <p>Jumlah sebesar    : Rp. {{ $dataPenjualan->harga_terjual }},00 </p>
+    <p>Titipan uang ke 1 untuk pembelian {{ $dataPenjualan->jenis_bayar }} sepeda motor baru di bawah ini:</p>
     <table>
         <tr>
             @php $i = 1; @endphp
@@ -63,29 +64,28 @@
             <td>{{ $dataPenjualan->barang->nama_barang }}</td>
         </tr>
     </table>
-    <h6> Harga tidak mengikat, harga yang berlaku adalah <br>
-        harga pada waktu penyerahan barang.</h6>
-    <h6> Apabila unit yang dipesan sudah ada dan dibatalkan<br>
-        maka uang yang dititipkan hangus 50%. </h6>
+    <p> Harga tidak mengikat, harga yang berlaku adalah <br>
+        harga pada waktu penyerahan barang.</p>
+    <p> Apabila unit yang dipesan sudah ada dan dibatalkan<br>
+        maka uang yang dititipkan hangus 50%. </p>
     <div class = "right-align"> 
-        Blitar, {{ $dataPenjualan->created_at }}
+        Blitar, {{ Carbon::parse($dataPenjualan->created_at)->formatLocalized('%e %B %Y') }}
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col text-left" > 
-                <h6> Admin Otorisasi Penjualan</h6>
-            </div>
+    <table>
+        <tr>
+            <td class="col text-left" > 
+                <p> Admin Otorisasi Penjualan</p>
+            </td>
 
-            <div class="col text-center"> 
-                <h6> {{ $dataPenjualan->karyawan->nama_karyawan }}</h6>
-            </div>
+            <td class="col text-center"> 
+                <p> {{ $dataPenjualan->karyawan->nama_karyawan }}</p>
+            </td>
 
-            <div class="col text-right">
-                <h6> {{ $dataPenjualan->konsumen->nama}} </h6>
-            </div>
-        </div>
-    </div>
+            <td class="col text-right">
+                <p> {{ $dataPenjualan->konsumen->nama}} </p>
+            </td>
+        </tr>
+    </table>
 </div>
-        
 </body>
 </html>

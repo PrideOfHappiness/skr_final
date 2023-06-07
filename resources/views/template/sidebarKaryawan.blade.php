@@ -59,7 +59,7 @@
                   </a>
             </li>
             <li class="nav-item"> 
-              <a href="#" class="nav-link">
+              <a href="/karyawan/bpkbstnk" class="nav-link">
                 <i class="fa-solid fa-id-card"></i>
                   <p>
                     BPKB dan STNK

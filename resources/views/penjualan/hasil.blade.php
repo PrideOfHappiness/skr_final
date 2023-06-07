@@ -12,6 +12,10 @@
         <div class="mt-4"> 
             <section class= "content"> 
                 <div class= "container-fluid"> 
+                    <form action="{{ route('filter') }}" method="POST">
+                        <input type="text" name="name" placeholder="Nama">
+                        <button type="submit">Filter</button> 
+                    </form>
                     <br>
                 <div class = "pull-right mb-2">
                     <a class="btn btn-success" href="{{ route('penjualan.create') }}"> Tambah Penjualan</a>

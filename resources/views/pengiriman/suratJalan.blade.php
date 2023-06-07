@@ -4,12 +4,15 @@
     <title>Surat Jalan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
-        body {
+        .body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
+            font-weight: normal;
         }
-        
+        .left-align{ 
+            text-align: left;
+        }
         .center-align{
             text-align: center;
         }
@@ -17,37 +20,38 @@
         .right-align{
             text-align: right;
         }
-        table {
+        .table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        th, td {
+        .th, td {
             padding: 8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
-        th {
+        .th {
             background-color: #f2f2f2;
         }
     </style>
+    @php use Carbon\Carbon; @endphp
 </head>
 <body>
-    <h2>PT. Marga Kartika Motor</h2>
-    <h3>Dealer Resmi Motor Honda</h3>
-    <h3>Blitar</h3>
+    <p>PT. Marga Kartika Motor</p>
+    <p>Dealer Resmi Motor Honda</p>
+    <p>Blitar</p>
 
     <div class="right-align">
-        <h5>Kepada Yth : {{ $dataPengiriman->no_fj->konsumen->nama }}</h5>
-        <h5>{{ $dataPengiriman->no_fj->konsumen->alamat }} </h5>
-        <h5>{{ $dataPengiriman->no_fj->konsumen->kode_wilayah->nama_wilayah }} </h5>
+        <p>Kepada Yth : {{ $dataPengiriman->fj->konsumen->nama }}</p>
+        <p>{{ $dataPengiriman->fj->konsumen->alamat }} </h5>
+        <p>{{ $dataPengiriman->fj->konsumen->kode_wilayah->nama_wilayah }} </p>
     </div>
     <div class="center-align"> 
-        <h6>Surat Jalan : {{ $dataPengiriman->surat_jalan }} </h6>
+        <p>Surat Jalan : {{ $dataPengiriman->surat_jalan }} </p>
     </div>
     <br>
-    <h6>Dengan hormat, bersama ini dikiriman 1 (satu) unit sepeda motor tersebut dibawah ini:</h6>
+    <p>Dengan hormat, bersama ini dikiriman 1 (satu) unit sepeda motor tersebut dibawah ini:</p>
     <table>
         <tr>
             @php $i = 1; @endphp
@@ -61,38 +65,36 @@
         </tr>
         <tr>
             <td>{{ $i++}}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->nomor_rangka }}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->kode_barang }}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->nama_barang }}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->warna }}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->tahun_rakit }}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->no_rangka }}</td>
-            <td>{{ $dataPengiriman->no_fj->barang->no_mesin }}</td>
+            <td>{{ $dataPengiriman->fj->barang->kode_barang }}</td>
+            <td>{{ $dataPengiriman->fj->barang->nama_barang }}</td>
+            <td>{{ $dataPengiriman->fj->barang->warna }}</td>
+            <td>{{ $dataPengiriman->fj->barang->tahun_rakit }}</td>
+            <td>{{ $dataPengiriman->fj->barang->nomor_rangka }}</td>
+            <td>{{ $dataPengiriman->fj->barang->nomor_mesin }}</td>
         </tr>
     </table>
-    <h6> Perlengkapan : </h6>
-    <h6> {{ $dataPengiriman->perlengkapan }}</h6>
+    <p> Perlengkapan : </p>
+    <p> {{ $dataPengiriman->perlengkapan }}</p>
     <div class = "right-align"> 
-        Blitar, {{ date('j-F-Y', $dataPengiriman->created_at) }}
+        Blitar, {{ Carbon::parse($dataPengiriman->created_at)->formatLocalized('%e %B %Y') }}
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col text-left" > 
+    <table>
+        <tr>
+            <td width="300px"> 
                 <h6> Penerima, <br>
                 Nama Jelas & T. Tangan/Cap</h6>
-            </div>
+            </td>
 
-            <div class="col text-center"> 
+            <td width="150px"> 
                 <h6> Pengirim, </h6>
-            </div>
-
-            <div class="col text-right">
+            </td>
+            
+            <td width="300px">
                 <h6> Mengetahui, <br>
                 Tanda Tangan & Cap Perusahaan </h6>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 </div>
-        
 </body>
 </html>

@@ -23,7 +23,7 @@ class GudangController extends Controller
         ]);
 
         $i = 2;
-        $increments = $i++;
+        $increments = ++$i;
         $nama_gudang = 'S'. str_pad($increments, 4, '0', STR_PAD_LEFT);
 
         Gudang::create([

@@ -68,4 +68,35 @@ class BarangController extends Controller
         $barang = Barang::where('nomor_rangka', $nomor_rangka)->first();
         return view('barang.show', compact('barang'));
     }
+
+    public function showKaryawan($id){
+        $barang = Barang::find($id);
+        return view('barang.showKaryawan', compact('barang'));
+    }
+
+    public function filter(Request $request){
+        $item = Barang::query();
+
+        if($request->has('kategori') && $request->has('status')){
+            $item->where('jenis', $request->input('kategori'))
+                ->where('status', $request->input('status'));
+        }
+
+        $hasil = $item->get();
+
+        return view('barang.hasil')->with('hasil', $hasil);
+    }
+
+    public function filterKaryawan(Request $request){
+        $item = Barang::query();
+
+        if($request->has('kategori')){
+            $item->where('jenis', $request->input('kategori'))
+                ->where('status', 'TERSEDIA');
+        }
+
+        $hasil = $item->get();
+
+        return view('barang.hasil')->with('hasil', $hasil);
+    }
 }
