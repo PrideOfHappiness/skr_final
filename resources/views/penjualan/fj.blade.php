@@ -75,13 +75,34 @@
         <tr>
             <td class="col text-left" > 
                 <p> Admin Otorisasi Penjualan</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p> Tanda tangan admin & cap perusahaan</p>
             </td>
 
             <td class="col text-center"> 
+                <p> Karyawan, </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <p> {{ $dataPenjualan->karyawan->nama_karyawan }}</p>
             </td>
 
             <td class="col text-right">
+                <p> Konsumen,  </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <p> {{ $dataPenjualan->konsumen->nama}} </p>
             </td>
         </tr>

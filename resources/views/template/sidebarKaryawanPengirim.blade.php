@@ -26,7 +26,7 @@
             <li class="nav-header">Fungsi-fungsi Sistem</li>
             <li class="nav-item"> 
                 <a href="/karyawanPengirim/pengiriman" class="nav-link">
-                  <i class="fa-solid fa-person"></i>
+                  <i class="fa-solid fa-truck-fast"></i>
                     <p>
                       Data Pengiriman
                     </p>

@@ -44,7 +44,7 @@
             </li>
             <li class="nav-item"> 
                 <a href="/karyawan/penjualan" class="nav-link">
-                  <i class="fa-solid fa-motorcycle"></i>
+                  <i class="fa-solid fa-cart-shopping"></i>
                     <p>
                       Penjualan Sepeda Motor
                     </p>

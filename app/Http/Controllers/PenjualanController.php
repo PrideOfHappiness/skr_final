@@ -35,15 +35,28 @@ class PenjualanController extends Controller
     }
 
     public function store(Request $request){
-        $i = 0001;
-        $increments = ++$i;
         $tahunIni = Carbon::now();
         $tahunSekarang = date('y');
         $bulanSekarang = date('m');
-        $kode_dealer = $request->kode_dealer;
-        $nomorFJ = 'FJ-'. $kode_dealer . '-'. $tahunSekarang . '-'. $bulanSekarang . '-' . str_pad($increments, 4, '0', STR_PAD_LEFT); 
+        $nomorFJ = 'FJ-MKM' . '-'. $tahunSekarang . '-'. $bulanSekarang . '-'; 
         $barang = Barang::find($request->nomor_rangka);
         
+        $penjualan = Penjualan::where('created_at', 'like', '%' . 
+            $tahunSekarang . '-' . $bulanSekarang . '%')->orderBy('no_fj', 'desc')->first();
+        
+        if($penjualan){
+            $currentNumber = substr($penjualan->no_fj, -4);
+
+            if($currentNumber == '9999'){
+                $nomorFJ .= '0001';
+            }else{
+                $newNumber = str_pad($currentNumber + 1, 4, '0', STR_PAD_LEFT);
+                $nomorFJ .= $newNumber;
+            }
+        }else{
+            $nomorFJ .= '0001';
+        }
+
         $penjualan = Penjualan::create([
             'no_fj' => $nomorFJ,
             'kode_customer' => $request->kode_konsumen,
@@ -51,7 +64,7 @@ class PenjualanController extends Controller
             'kode_gudang' => $request->kode_gudang,
             'kode_karyawan' => $request->kode_karyawan,
             'nomor_rangka' => $request->nomor_rangka,
-            'dealer' => $kode_dealer,
+            'dealer' => 'MKM',
             'harga_terjual' => $request->harga,
             'jenis_bayar' => $request->jenis_bayar,
         ]);

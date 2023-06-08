@@ -12,15 +12,21 @@
         <div class="mt-4"> 
             <section class="content"> 
                 <div class = "pull-right mb-2" class="wrapper"> 
+                    <label> Filter data berdasarkan: </label>
                     <form action="{{ route('filterKry')}}" method="post"> 
                         @csrf
+                        <label for="kategori">Jenis SPM: </label>
                         <select name="kategori" id="kategori" lass="js-example-basic-single form-control"> 
-                            <option value=""> Silahkan pilih kategori sepeda motor terlebih dahulu! </option>
+                            <option value=""> Silahkan pilih kategori SPM dahulu! </option>
                             <option value="MATIC"> Matic / Scooter </option>
                             <option value="CUB"> Bebek / Cub </option>
                             <option value="SPORT"> Sport </option>
                             <option value="ADVENTURE"> Adventure </option>
                         </select>
+                        <label for="dataAwal"> Tanggal Awal: </label> 
+                            <input type="date" name="dataAwal" id="dataAwal" class="width: 100px;">
+                        <label for="dataAkhir"> Tanggal Akhir: </label> 
+                            <input type="date" name="dataAkhir" id="dataAkhir" class="width: 100px;">
                         <button type="submit" class="btn btn-primary">Cari</button>
                     </form>
                 </div>

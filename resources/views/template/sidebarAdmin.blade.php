@@ -42,7 +42,7 @@
           </li>
           <li class="nav-item"> 
             <a href="/admin/wilayah" class="nav-link">
-              <i class="fa-solid fa-map-pin"></i>
+              <i class="fa-solid fa-location-crosshairs"></i>
                 <p>
                   Data Wilayah
                 </p>

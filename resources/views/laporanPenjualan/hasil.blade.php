@@ -32,11 +32,8 @@
             </div>
         </div>
         @include('template/footer')
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </body>
 </html>
-
 <script>
     //--GrafikSPM1 (Keluar Hasil SQL)
     var chartDatas = JSON.parse('<?php echo $chart_data; ?>');

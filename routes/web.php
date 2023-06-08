@@ -16,6 +16,7 @@ use App\Http\Controllers\PengirimanKaryawanController;
 use App\Http\Controllers\RekapPenjualanController;
 use App\Http\COntrollers\RekapPengirimanController;
 use App\Http\Controllers\BpkbStnkController;
+use App\Http\Controllers\DashboardAdminController;
 
 /*
 |--------------------------------------------------------------------------

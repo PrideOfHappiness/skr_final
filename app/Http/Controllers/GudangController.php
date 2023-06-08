@@ -22,7 +22,7 @@ class GudangController extends Controller
             'alamat' => 'required',
         ]);
 
-        $i = 2;
+        $i = 1;
         $increments = ++$i;
         $nama_gudang = 'S'. str_pad($increments, 4, '0', STR_PAD_LEFT);
 

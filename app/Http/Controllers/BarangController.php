@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Imports\ImportBarang;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class BarangController extends Controller
 {
@@ -76,26 +77,46 @@ class BarangController extends Controller
 
     public function filter(Request $request){
         $item = Barang::query();
-
-        if($request->has('kategori') && $request->has('status')){
-            $item->where('jenis', $request->input('kategori'))
-                ->where('status', $request->input('status'));
+        $kategori = $request->kategori;
+        $status = $request->status;
+        $tanggalAwal = $request->input('dataAwal');
+        $tanggalAkhir = $request->input('dataAkhir');
+        
+        $kriteria = [];
+        if($kategori){
+            $kriteria[] = ['jenis', '=', $kategori];
+        }
+        if($status){
+            $kriteria[] = ['status', '=', $status];
+        }
+        if($tanggalAwal && $tanggalAkhir){
+            $kriteria[] = ['updated_at', '>=', Carbon::createFromFormat('Y-m-d H:i:s', $request->date('dataAwal'))->startOfDay()];
+            $kriteria[] = ['updated_at', '<=', Carbon::createFromFormat('Y-m-d H:i:s', $request->date('dataAkhir'))->endOfDay()];
         }
 
-        $hasil = $item->get();
-
+        $hasil = $item->where($kriteria)->get();          
         return view('barang.hasil')->with('hasil', $hasil);
     }
 
     public function filterKaryawan(Request $request){
         $item = Barang::query();
+        $kategori = $request->kategori;
+        $tanggalAwal = $request->input('dataAwal');
+        $tanggalAkhir = $request->input('dataAkhir');
 
-        if($request->has('kategori')){
-            $item->where('jenis', $request->input('kategori'))
-                ->where('status', 'TERSEDIA');
+
+        $kriteria = [];
+        if($kategori){
+            $kriteria[] = ['jenis', '=', $kategori];
+            $kriteria[] = ['status', '=' , 'TERSEDIA'];
         }
 
-        $hasil = $item->get();
+        if($tanggalAwal && $tanggalAkhir){
+            $kriteria[] = ['updated_at', '>=', Carbon::createFromFormat('Y-m-d H:i:s', $request->date('dataAwal'))->startOfDay()];
+            $kriteria[] = ['updated_at', '<=', Carbon::createFromFormat('Y-m-d H:i:s', $request->date('dataAkhir'))->endOfDay()];
+        }
+
+        $hasil = $item->where($kriteria)->get();
 
         return view('barang.hasil')->with('hasil', $hasil);
     }

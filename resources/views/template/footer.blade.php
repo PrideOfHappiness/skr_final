@@ -7,7 +7,7 @@
     </div>
   </footer>
 
-  <!-- jQuery -->
+<!-- jQuery -->
 <script src="{{ asset('style/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('style/plugins/jquery-ui/jquery-ui.min.js') }}"></script>

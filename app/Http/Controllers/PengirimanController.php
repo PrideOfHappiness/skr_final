@@ -37,10 +37,28 @@ class PengirimanController extends Controller
         ]);
 
         $i = 1;
-        $increments = $i++;
+        $increments = ++$i;
         $tahun = date('Y');
-        $suratJalan = 'SJ-'. $tahun . '-' . $increments;
+        $bulan = date('m');
+        $hari = date('d');
+        $suratJalan = 'SJ-'. $tahun . '-' . $bulan . '-' . $hari . '-';
         $carbon = Carbon::now();
+
+        $pengiriman = Pengiriman::where('created_at', 'like', '%' . $tahun . 
+            '-' . $bulan . '-' . $hari .  '%')->orderBy('surat_jalan', 'desc')->first();
+        
+        if($pengiriman){
+            $currentNumber = substr($pengiriman->surat_jalan, -4);
+
+            if($currentNumber == '9999'){
+                $suratJalan .= '0001';
+            }else{
+                $newNumber = str_pad($currentNumber + 1, 4, '0', STR_PAD_LEFT);
+                $suratJalan .= $newNumber;
+            }
+        }else{
+            $suratJalan .= '0001';
+        }
 
         $pengiriman = Pengiriman::create([
             'surat_jalan' => $suratJalan,

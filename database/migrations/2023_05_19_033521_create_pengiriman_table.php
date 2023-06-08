@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pengiriman', function (Blueprint $table) {
             $table->id();
-            $table->string('surat_jalan')->unique();
+            $table->string('surat_jalan', 18)->unique();
             $table->bigInteger('no_fj')->unsigned();
             $table->bigInteger('karyawan_pengirim')->unsigned();
             $table->text('perlengkapan');
