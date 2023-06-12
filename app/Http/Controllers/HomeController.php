@@ -47,16 +47,22 @@ class HomeController extends Controller
 
     public function karyawanHome()
     {
+        $tahun = date('y');
+        $bulan = date('m');
         $konsumen = Konsumen::select('kode_konsumen')->count();
-        $penjualan = Penjualan::select('no_fj')->count();
-        $pengirimanBerlangsung = Pengiriman::where('status', 'Barang Sedang Dikirim')->count();
-        $pengirimanSelesai = Pengiriman::where('status', 'Selesai')->count();
+        $penjualan = Penjualan::select('no_fj')
+            ->whereYear('no_fj', $tahun)->whereMonth('no_fj', $bulan)->count();
+        $pengirimanBerlangsung = Pengiriman::where('status', 'Barang Sedang Dikirim')->
+            whereYear('surat_jalan', $tahun)->whereMonth('surat_jalan', $bulan)->count();
+        $pengirimanSelesai = Pengiriman::where('status', 'Selesai')
+            ->whereYear('surat_jalan', $tahun)->whereMonth('surat_jalan', $bulan)->count();
 
         return view('dashboard.karyawan', compact('konsumen', 'penjualan', 'pengirimanBerlangsung', 'pengirimanSelesai'));
     }
 
     public function pemilikHome()
     {
+        //Penjualan
         $chartPenjualan = Penjualan::join('barang', 'penjualan.nomor_rangka', '=', 'barang.id')
             ->select('barang.nama_barang', DB::raw('count(penjualan.no_fj) as total'))
             ->groupBy('barang.nama_barang')->get();
@@ -64,6 +70,7 @@ class HomeController extends Controller
         $labelPenjualan = $chartPenjualan->pluck('nama_barang');
         $dataPenjualan = $chartPenjualan->pluck('total');
 
+        //Pengiriman
         $chartPengiriman = Pengiriman::selectRaw("YEAR(surat_jalan) as tahun, MONTH(surat_jalan) as bulan, count(*) as total")
             ->groupBy('tahun', 'bulan')->get();
         
@@ -75,7 +82,45 @@ class HomeController extends Controller
 
             $chartDataPengiriman[$tahun][$bulan] = $total;
         }
-        return view('dashboard.pemilik', compact('labelPenjualan', 'dataPenjualan', 'chartDataPengiriman'));
+
+        //GrowthPenjualanYoY
+        $penjualanTahunSebelumnya = Penjualan::whereYear('created_at', date('Y') - 1)->count();
+        $penjualanTahunIni = Penjualan::whereYear('created_at', date('Y'))->count();
+
+        $growthPenjualanYoY =  0 . '%';
+        if($penjualanTahunSebelumnya != 0){
+            $growthPenjualanYoY = (($penjualanTahunIni - $penjualanTahunSebelumnya) / $penjualanTahunSebelumnya) * 100;
+        }else{
+            $growthPenjualanYoY = ($penjualanTahunIni) * 100;
+        }
+
+        //GrowthPenjualanMoM
+        $penjualanTahunBulanSebelumnya = Penjualan::whereYear('created_at', date('Y') - 1)
+            ->whereMonth('created_at', date('m'))->count();
+        $penjualanTahunBulanIni = Penjualan::whereYear('created_at', date('Y'))
+            ->whereMonth('created_at', date('m'))->count();
+
+        $growthPenjualanMoM = 0 . '%';
+        if($penjualanTahunBulanSebelumnya != 0){
+            $growthPenjualanMoM = (($penjualanTahunBulanIni - $penjualanTahunBulanSebelumnya) / $penjualanTahunBulanSebelumnya) * 100;
+        }else{
+            $growthPenjualanMoM = ($penjualanTahunBulanIni) * 100;
+        }
+
+        //GrowthPenjualanMovM
+        $penjualanBulanSebelumnya = Penjualan::whereMonth('created_at', date('m') - 1)->count();
+        $penjualanBulanIni = Penjualan::whereMonth('created_at', date('m'))->count();
+
+        $growthPenjualanMovM =  0 . '%';
+        if($penjualanBulanSebelumnya !=0){
+            $growthPenjualanMovM = (($penjualanBulanIni - $penjualanBulanSebelumnya) / $penjualanBulanSebelumnya) * 100;
+        }else{
+            $growthPenjualanMovM = ($penjualanBulanIni) * 100;
+        }
+
+
+        return view('dashboard.pemilik', compact('labelPenjualan', 'dataPenjualan', 'chartDataPengiriman', 'growthPenjualanYoY', 
+        'growthPenjualanMoM', 'growthPenjualanMovM'));
     }
 
     public function karyawanPengirimHome(){

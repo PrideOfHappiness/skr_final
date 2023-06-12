@@ -52,8 +52,10 @@
                     <thead>
                     <tr>
                         <th>No.</th>
+                        <th>No. Rangka</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
+                        <th>Warna</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -63,11 +65,13 @@
                         @foreach ($barang as $brg)
                             <tr> 
                                 <td> {{ $i++ }} </td>
+                                <td> {{ $brg->nomor_rangka }}</td>
                                 <td> {{ $brg->kode_barang }}</td>
                                 <td> {{ $brg->nama_barang }}</td>
+                                <td> {{ $brg->warna }}</td>
                                 <td> {{ $brg->status}} </td>
                                 <td> 
-                                    <a class="badge bg-info" href="{{ route('barang.show', $brg->kode_barang)}}">Detail</span></a>
+                                    <a class="badge bg-info" href="{{ route('barang.show', $brg->id)}}">Detail</span></a>
                                 </td>
                             </tr>
                         @endforeach

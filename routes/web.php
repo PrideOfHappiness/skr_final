@@ -16,7 +16,7 @@ use App\Http\Controllers\PengirimanKaryawanController;
 use App\Http\Controllers\RekapPenjualanController;
 use App\Http\COntrollers\RekapPengirimanController;
 use App\Http\Controllers\BpkbStnkController;
-use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\GrowthPenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +40,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+    Route::get('/aboutUs', [LogoutController::class, 'aboutUs']);
 });
 
 Route::middleware(['Admin'])->group(function() {

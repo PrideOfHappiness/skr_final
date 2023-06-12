@@ -26,7 +26,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $barangTersedia}}</h3>
-                                <p>Stok SPM Terdeteksi</p>
+                                <p>Stok SPM tersedia dalam satu bulan terakhir</p>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-motorcycle"></i>
@@ -38,7 +38,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $barangTerjual}}</h3>
-                                <p>SPM Terjual</p>
+                                <p>SPM Terjual dalam satu bulan terakhir</p>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-cart-shopping"></i>

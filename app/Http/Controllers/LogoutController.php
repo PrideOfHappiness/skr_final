@@ -14,4 +14,8 @@ class LogoutController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function aboutUs(){
+        return view('aboutUs');
+    }
 }

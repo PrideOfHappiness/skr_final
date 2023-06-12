@@ -39,7 +39,7 @@ class BpkbStnkController extends Controller
             'status_stnk_plat' => 'Sedang diadministrasikan',
         ]);
 
-        return redirect()->route('bpkb_stnk.index')
+        return redirect('/karyawan/bpkbstnk')
             ->with('success', 'Data BPKB dan STNK sementara berhasil ditambahkan!');
     }
 
@@ -67,7 +67,7 @@ class BpkbStnkController extends Controller
                 $bpkb_stnk->tgl_ambil_stnk_plat = Carbon::now();
                 $bpkb_stnk->update();
 
-                return redirect()->route('bpkb_stnk.index')
+                return redirect('/karyawan/bpkbstnk')
                     ->with('success', 'Data Nopol dan Data Pengambil Berhasil Diubah!');
             } else if($jenis == 'bpkb'){
                 $bpkb_stnk->nomor_bpkb = $request->no_bpkb;
@@ -75,18 +75,18 @@ class BpkbStnkController extends Controller
                 $bpkb_stnk->tgl_ambil_bpkb = Carbon::now();
                 $bpkb_stnk->update();
 
-                return redirect()->route('bpkbstnk.index')
+                return redirect('/karyawan/bpkbstnk')
                     ->with('success', 'Data BPKB Berhasil ditambahkan!');
             }
         } else{
-            return redirect()->route('bpkb_stnk.edit')
+            return redirect()->route('bpkbStnk.edit')
                 ->with('error', 'Jenis Administrasi Tidak Ditekan!');
         }
     }
 
     public function downloadStnk($id){
         $stnk = Bpkb_Stnk::find($id);
-        //$stnk->status_stnk_plat = 'Sudah Diambil';
+        $stnk->status_stnk_plat = 'Sudah Diambil';
         $stnk->tgl_ambil_stnk_plat = now();
         $stnk->karyawan_cetak_surat_stnk = Auth::id();
         $stnk->save();
@@ -97,7 +97,7 @@ class BpkbStnkController extends Controller
 
     public function downloadBpkb($id){
         $bpkb = Bpkb_Stnk::find($id);
-        //$bpkb->status_bpkb = 'Sudah Diambil';
+        $bpkb->status_bpkb = 'Sudah Diambil';
         $bpkb->tgl_ambil_bpkb = now();
         $bpkb->karyawan_cetak_surat_bpkb = Auth::id();
         $bpkb->save();

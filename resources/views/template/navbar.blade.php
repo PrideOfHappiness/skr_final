@@ -15,7 +15,7 @@
         <a href="#" class="nav-link">Dashboard</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Tentang Situs dan Kontak Perusahaan</a>
+        <a href="/aboutUs" class="nav-link">Tentang Situs dan Kontak Perusahaan</a>
       </li>
     </ul>
 

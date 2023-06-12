@@ -22,19 +22,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="wilayah_asal" class="form-label">Wilayah Asal</label>
-                        <input type="text" class="form-control" id="wilayah_asal" name="wilayah_asal" value=" 
-                            @foreach($wilayah as $w)
-                                @if($konsumen->wilayah == $w->kode_wilayah)
-                                    {{$w->nama_wilayah}}
-                                @endif
-                            @endforeach" readonly>
+                        <input type="text" class="form-control" id="wilayah_asal" name="wilayah_asal" value="{{ $konsumen->kode_wilayah->nama_wilayah }}">
                     </div>
                     <div class="mb-3">
                         <label for="nama_dosen" class="form-label">Wilayah</label>
                         <select name="kode_wilayah" id="kode_wilayah" class="form-control select2-multiple">
                             <option value="">Silahkan pilih wilayah terlebih dahulu!</option>
                             @foreach($wilayah as $wyl)
-                                <option value="{{$wyl->kode_wilayah}}"> {{ $wyl->nama_wilayah }} </option>
+                                <option value="{{$wyl->id}}"> {{ $wyl->nama_wilayah }} </option>
                             @endforeach
                         </select>
                     </div>

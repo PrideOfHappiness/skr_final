@@ -66,7 +66,7 @@
                             <option value="Kredit"> Kredit Leasing </option>
                         </select>
                     </div>
-                    <h3> Data Karyawan Penjual dan Dealer </h3>
+                    <h3> Data Karyawan Penjual</h3>
                     <br>
                     <div class="mb-3">
                         <label for="kode_karyawan" class="form-label">Karyawan Penjual</label>

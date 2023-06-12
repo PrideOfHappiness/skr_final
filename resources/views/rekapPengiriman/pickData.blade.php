@@ -42,7 +42,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary"> Ambil Data berdasarkan Tanggal Yang Dipilih ini </button>
+                                    <button type="submit" class="btn btn-primary"> Ambil Data </button>
                                 </div>
                             </div>
                         </form>

@@ -45,7 +45,7 @@
     <br>
     <p>Telah terima dari : {{ $dataPenjualan->konsumen->nama}} </p>
     <p>Jumlah sebesar    : Rp. {{ $dataPenjualan->harga_terjual }},00 </p>
-    <p>Titipan uang ke 1 untuk pembelian {{ $dataPenjualan->jenis_bayar }} sepeda motor baru di bawah ini:</p>
+    <p>Titipan uang untuk pembelian {{ $dataPenjualan->jenis_bayar }} sepeda motor baru di bawah ini:</p>
     <table>
         <tr>
             @php $i = 1; @endphp
@@ -69,7 +69,7 @@
     <p> Apabila unit yang dipesan sudah ada dan dibatalkan<br>
         maka uang yang dititipkan hangus 50%. </p>
     <div class = "right-align"> 
-        Blitar, {{ Carbon::parse($dataPenjualan->created_at)->formatLocalized('%e %B %Y') }}
+        Wlingi, {{ Carbon::parse($dataPenjualan->created_at)->formatLocalized('%e %B %Y') }}
     </div>
     <table>
         <tr>

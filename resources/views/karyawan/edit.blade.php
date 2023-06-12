@@ -35,11 +35,12 @@
                     <div class="mb-3">
                         <label for="status" class="form-label">Jabatan</label>
                         <select name="status" id="status" class="form-control select2-multiple">
-                            <option value="">Silahkan pilih jabatan terlebih dahulu!</option>
                             <option value={{$karyawan->status}}>{{ $karyawan->status}}</option>
+                            <option value="">Silahkan pilih jabatan terlebih dahulu!</option>
                             <option value="Karyawan"> Karyawan </option>
                             <option value="Admin"> Admin </option>
                             <option value="Pemilik"> Pemilik </option>
+                            <option value="Karyawan Pengirim"> Karyawan Pengirim </option>
                         </select>
                     </div>
                     <div class="mb-3">

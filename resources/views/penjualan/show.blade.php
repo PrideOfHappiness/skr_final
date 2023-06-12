@@ -24,8 +24,12 @@
                     <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $penjualan->konsumen->alamat }}" readonly>
                 </div>
                 <div class="mb-3">
-                    <label for="kecamatan" class="form-label">Gudang Sepeda Motor Diambil</label>
+                    <label for="kecamatan" class="form-label">Kecamatan konsumen</label>
                     <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ $penjualan->konsumen->kecamatan }}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="kecamatan" class="form-label">Gudang</label>
+                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="{{ $penjualan->gudang->nama_gudang }}" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="no_ktp" class="form-label">Sepeda Motor Terjual</label>

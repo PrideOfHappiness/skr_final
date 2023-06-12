@@ -65,8 +65,8 @@ class BarangController extends Controller
         return redirect('/admin/barang');
     }
 
-    public function show($nomor_rangka){
-        $barang = Barang::where('nomor_rangka', $nomor_rangka)->first();
+    public function show($id){
+        $barang = Barang::find($id);
         return view('barang.show', compact('barang'));
     }
 

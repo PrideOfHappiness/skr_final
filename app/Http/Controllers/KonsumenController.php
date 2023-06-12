@@ -64,7 +64,7 @@ class KonsumenController extends Controller
         return view('konsumen.edit', compact('konsumen', 'wilayah'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request, $id){
         $konsumen = Konsumen::find($id);
 
         $this->validate($request,[
@@ -84,7 +84,7 @@ class KonsumenController extends Controller
             $foto_ktp->move('upload/foto_ktp/', $fileKtp);
         }
 
-        $idkon->update([
+        $konsumen->update([
             'kode_konsumen' => $request->kode_konsumen,
             'nama' => $request->nama_konsumen,
             'wilayah' => $request->kode_wilayah,

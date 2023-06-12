@@ -76,22 +76,40 @@
     <p> Perlengkapan : </p>
     <p> {{ $dataPengiriman->perlengkapan }}</p>
     <div class = "right-align"> 
-        Blitar, {{ Carbon::parse($dataPengiriman->created_at)->formatLocalized('%e %B %Y') }}
+        Wlingi, {{ Carbon::parse($dataPengiriman->created_at)->formatLocalized('%e %B %Y') }}
     </div>
     <table>
         <tr>
-            <td width="300px"> 
-                <h6> Penerima, <br>
-                Nama Jelas & T. Tangan/Cap</h6>
+            <td width="250px"> 
+                <p> Penerima, <br>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p> {{ $dataPengiriman->fj->konsumen->nama }}</p>
             </td>
 
-            <td width="150px"> 
-                <h6> Pengirim, </h6>
+            <td width="250px"> 
+                <p> Pengirim, </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p> {{ $dataPengiriman->pengirim->nama_karyawan }}</p>
             </td>
             
-            <td width="300px">
-                <h6> Mengetahui, <br>
-                Tanda Tangan & Cap Perusahaan </h6>
+            <td width="250px">
+                <p> Mengetahui, </p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p> Tanda Tangan & <br>
+                    Cap Perusahaan </p>
             </td>
         </tr>
     </table>

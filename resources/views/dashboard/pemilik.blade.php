@@ -9,24 +9,51 @@
 @include('template/sidebarPemilik')
 <div class="container"> 
     <div class="mt-4">
-        <div class="card"> 
-            <div class="card-header"> 
-                <h3 class="card-title"> 
-                    <p> Diagram Persentase Sepeda Motor Terjual </p>
-                </h3>
+        <div class="row"> 
+            <div class="col-md-4">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $growthPenjualanYoY . ' %'}}</h3>
+                        <p>Pertumbuhan Penjualan Year on Year (YoY)</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                </div>
             </div>
-            <div class="card-body"> 
-                <canvas id="SPMTerjual"> </canvas>
+            <div class="col-md-4">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $growthPenjualanMoM . ' %'}}</h3>
+                        <p>Pertumbuhan Penjualan Month on Month (MoM)</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $growthPenjualanMovM . ' %'}}</h3>
+                        <p>Pertumbuhan Penjualan Month to Month (MtM)</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card"> 
-            <div class="card-header"> 
-                <h3 class="card-title"> 
-                    <p> Diagram Frekuensi Pengiriman </p>
-                </h3>
-            </div>
-            <div class="card-body"> 
-                <canvas id="Pengiriman"> </canvas>
+        <div class="row">
+            <div class="card"> 
+                <div class="card-header"> 
+                    <h3 class="card-title"> 
+                        <p> Diagram Persentase Sepeda Motor Terjual </p>
+                    </h3>
+                </div>
+                <div class="card-body"> 
+                    <canvas id="SPMTerjual"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -80,48 +107,6 @@
         document.getElementById('SPMTerjual'),
         config
     );
-</script>
-
-<script> 
-    var chartData = {!! json_encode($chartDataPengiriman) !!};
-
-    var labels = [];
-    var datasets = [];
-
-    for(var tahun in chartData){
-        labels.push(tahun);
-        var bulanData = chartData[tahun];
-        var dataset = {
-            label: tahun,
-            data: [],
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        };
-
-        for(var bulan in bulanData){
-            dataset.data.push(bulanData[bulan]);
-        }
-
-        datasets.push(dataset);
-    }
-
-    var ctx = document.getElementById('Pengiriman').getContext('2d');
-    new Chart(ctx, {
-        type: 'bar', 
-        data: {
-            labels: labels,
-            datasets: datasets,
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginsAtZero: true
-                }
-            }
-        }
-    });
 </script>
 </body>
 </html>
