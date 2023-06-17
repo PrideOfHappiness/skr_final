@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('template/header')
-    <title>Tambah Data Konsumen</title>
+    <title>Edit Data Konsumen</title>
 </head>
 <body>
     @include('template/navbar')

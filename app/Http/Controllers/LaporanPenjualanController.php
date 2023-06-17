@@ -38,8 +38,4 @@ class LaporanPenjualanController extends Controller
                 ->with('awal', $awal)
                 ->with('akhir', $akhir);
     }
-
-    public function index(){
-
-    }
 }

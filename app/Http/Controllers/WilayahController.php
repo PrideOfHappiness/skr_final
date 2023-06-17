@@ -36,8 +36,8 @@ class WilayahController extends Controller
             ->with('success', 'Data Wilayah berhasil ditambahkan!');
     }
 
-    public function show($kode_wilayah){
-        $wilayah = Wilayah::where('kode_wilayah', $kode_wilayah)->first();
+    public function show($id){
+        $wilayah = Wilayah::find($id);
         return view('wilayah.show', compact('wilayah'));
     }
 }

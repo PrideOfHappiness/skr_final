@@ -5,6 +5,7 @@
 </head>
 <body> 
     @include('template/navbar')
+    @include('template/sidebar')
 
     <div class="content-wrapper px-4 py-2"> 
         <div class="content-header">

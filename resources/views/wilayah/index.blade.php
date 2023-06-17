@@ -33,7 +33,7 @@
                             <td>{{ $wilayah->kode_wilayah }} </td>
                             <td>{{ $wilayah->nama_wilayah }} </td>
                             <td> 
-                                <a class="badge bg-info" href="{{ route('wilayah.show', $wilayah->kode_wilayah)}}">Detail Wilayah</span></a>
+                                <a class="badge bg-info" href="{{ route('wilayah.show', $wilayah->id)}}">Detail Wilayah</span></a>
                             </td>
                         </tr>
                         @endforeach
