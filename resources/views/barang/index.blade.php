@@ -40,19 +40,22 @@
                             <option value="TERSEDIA"> Tersedia di dalam gudang </option>
                             <option value="TERJUAL"> Terjual </option>
                         </select>
-                        <label for="dataAwal"> Tanggal Awal: </label> 
-                            <input type="date" name="dataAwal" id="dataAwal" class="width: 100px;">
-                        <label for="dataAkhir"> Tanggal Akhir: </label> 
-                            <input type="date" name="dataAkhir" id="dataAkhir" class="width: 100px;">
                     </div>
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </form>
             <br>
+
+            @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+            @endif
                 <table class="table">
                     <thead>
                     <tr>
                         <th>No.</th>
                         <th>No. Rangka</th>
+                        <th>No. Mesin</th>
                         <th>Kode Barang</th>
                         <th>Nama Barang</th>
                         <th>Warna</th>
@@ -66,6 +69,7 @@
                             <tr> 
                                 <td> {{ $i++ }} </td>
                                 <td> {{ $brg->nomor_rangka }}</td>
+                                <td> {{ $brg->nomor_mesin }}</td>
                                 <td> {{ $brg->kode_barang }}</td>
                                 <td> {{ $brg->nama_barang }}</td>
                                 <td> {{ $brg->warna }}</td>

@@ -46,10 +46,10 @@
                                 <form action = "{{ route('pengiriman.destroy', $penjualan->id) }}" method="Post">
                                     <a class="badge bg-info" href="{{ route('pengiriman.show', $penjualan->id)}}">Detail Pengiriman</span></a>
                                     <a class="badge bg-warning" href="/pengiriman/{{ $penjualan->id}}/downloadSJ">Download Surat Jalan</span></a>
-                                    <a class="badge bg-warning" href="/pengiriman/{{ $penjualan->id}}/ubahStatusPengiriman">Ubah Status Menjadi Pengiriman</span></a>
+                                    <a class="badge bg-success" href="/pengiriman/{{ $penjualan->id}}/ubahStatusPengiriman">Kirim</span></a>
                                     @csrf
                                         @method("DELETE")
-                                            <button type="submit" class="badge bg-danger"> Hapus Data Pengiriman Ini</button>
+                                            <button type="submit" class="badge bg-danger">Tidak jadi dikirim, SPM diambil sendiri</button>
                                 </form>
                             </td>
                         @endforeach

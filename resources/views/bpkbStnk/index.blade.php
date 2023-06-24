@@ -16,6 +16,13 @@
                         <a class="btn btn-success" href="{{ route('bpkbstnk.create') }}">Buat Data BPKB dan STNK Baru</a>
                     </div>
                 </div>
+                
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+
                 <table class="table">
                     <thead>
                         <tr>

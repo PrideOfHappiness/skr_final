@@ -16,6 +16,12 @@
                     <a class="btn btn-success" href="{{ route('gudang.create') }}"> Tambah Data Gudang</a>
                 </div>
         
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+                
                 <table class="table">
                     <thead>
                     <tr>

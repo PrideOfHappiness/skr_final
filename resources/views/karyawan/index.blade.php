@@ -15,7 +15,17 @@
                 <div class = "pull-right mb-2">
                     <a class="btn btn-success" href="{{ route('karyawan.create') }}"> Tambah Karyawan</a>
                 </div>
-        
+                
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+                @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
                 <table class="table">
                     <thead>
                     <tr>

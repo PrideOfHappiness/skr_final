@@ -7,6 +7,9 @@ use Validator;
 use App\Models\Konsumen;
 use Illuminate\Support\Facades\DB;
 use App\Models\Wilayah;
+use App\Models\Penjualan;
+use App\Models\Pengiriman;
+use App\Models\Bpkb_Stnk;
 
 class KonsumenController extends Controller
 {
@@ -75,25 +78,37 @@ class KonsumenController extends Controller
             'kecamatan' => 'required',
             'no_ktp' => 'required',
             'no_telp' => 'required',
-            'namaFileKtp' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'namaFileKtp' => 'mimes:jpg,jpeg,png|max:2048',
         ]);
 
         if($request->hasFile('namaFileKtp')){
             $foto_ktp = $request->file('namaFileKtp');
             $fileKtp = $foto_ktp->getClientOriginalName();
             $foto_ktp->move('upload/foto_ktp/', $fileKtp);
+
+            $konsumen->update([
+                'kode_konsumen' => $request->kode_konsumen,
+                'nama' => $request->nama_konsumen,
+                'wilayah' => $request->kode_wilayah,
+                'alamat' => $request->alamat,
+                'kecamatan' => $request->kecamatan,
+                'no_ktp' => $request->no_ktp,
+                'no_telp' => $request->no_telp,
+                'namaFileKtp' => $fileKtp,
+                ]);
+        }else{
+            $konsumen->update([
+                'kode_konsumen' => $request->kode_konsumen,
+                'nama' => $request->nama_konsumen,
+                'wilayah' => $request->kode_wilayah,
+                'alamat' => $request->alamat,
+                'kecamatan' => $request->kecamatan,
+                'no_ktp' => $request->no_ktp,
+                'no_telp' => $request->no_telp,
+                ]);
         }
 
-        $konsumen->update([
-            'kode_konsumen' => $request->kode_konsumen,
-            'nama' => $request->nama_konsumen,
-            'wilayah' => $request->kode_wilayah,
-            'alamat' => $request->alamat,
-            'kecamatan' => $request->kecamatan,
-            'no_ktp' => $request->no_ktp,
-            'no_telp' => $request->no_telp,
-            'namaFileKtp' => $fileKtp,
-            ]);
+        
 
         return redirect()->route('konsumen.index')
             ->with('success', 'Data Konsumen Berhasil Diubah!');
@@ -101,9 +116,17 @@ class KonsumenController extends Controller
     
         public function destroy($id){
             $konsumen = Konsumen::find($id);
-            $konsumen->delete();
+            $id_konsumen = $konsumen->id;
 
-            return redirect()->route('konsumen.index')
-                ->with('success', 'Data Konsumen Berhasil Dihapus!');
+            $checkPenjualan = Penjualan::where('Penjualan.kode_customer',$id_konsumen)->get();
+            
+            if(sizeof($checkPenjualan)>0){
+                return redirect()->route('konsumen.index')
+                ->with('error', 'Data Konsumen tidak dapat dihapus!');
+            }else{
+                $konsumen->delete();
+                return redirect()->route('konsumen.index')
+                    ->with('success', 'Data Konsumen Berhasil Dihapus!');
+            }
     }
 }

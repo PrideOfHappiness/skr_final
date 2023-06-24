@@ -54,7 +54,7 @@
                         <img width="150px" src="{{ url('upload/foto_ktp/'.  $konsumen->namaFileKtp)}}">
                     <div class="mb-3">
                         <label for="namaFileKtp" class="form-label">Foto KTP Konsumen</label>
-                        <input type="file" class="form-control" id="namaFileKtp" name="namaFileKtp" value="{{ $konsumen->namaFileKtp }}" required>
+                        <input type="file" class="form-control" id="namaFileKtp" name="namaFileKtp" value="{{ $konsumen->namaFileKtp }}">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

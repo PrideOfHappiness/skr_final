@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Penjualan;
+use App\Models\Pengiriman;
+use App\Models\Bpkb_Stnk;
 use Validator;
 
 class KaryawanController extends Controller
@@ -110,9 +113,21 @@ class KaryawanController extends Controller
 
     public function destroy($id){
         $karyawan = User::find($id);
-        $karyawan->delete();
+        $id_karyawan = $karyawan->id;
 
-        return redirect()->route('karyawan.index')
+        $checkPenjualan = Penjualan::where('Penjualan.kode_karyawan',$id_karyawan)->get();
+        $checkPengiriman = Pengiriman::where('Pengiriman.karyawan_pengirim',$id_karyawan)->get();
+        $checkBPKB = Bpkb_Stnk::where('Bpkb_Stnk.karyawan_cetak_surat_stnk',$id_karyawan)->get();
+        if (sizeof($checkPenjualan)>0 || sizeof($checkPengiriman)>0 || sizeof($checkBPKB)>0){
+            return redirect()->route('karyawan.index')
+            ->with('error', 'Data Karyawan tidak dapat dihapus!');
+        }else{
+            $karyawan->delete();
+            return redirect()->route('karyawan.index')
             ->with('success', 'Data Karyawan Berhasil Dihapus!');
+        }
+
+
+
     }
 }

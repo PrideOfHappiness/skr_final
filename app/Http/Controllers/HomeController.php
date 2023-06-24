@@ -63,64 +63,85 @@ class HomeController extends Controller
     public function pemilikHome()
     {
         //Penjualan
+        // $chartBarang =  Penjualan::join('barang', 'penjualan.nomor_rangka', '=', 'barang.id')
+        //     ->select('barang.nama_barang', DB::raw('count(barang.nama_barang) as total'))
+        //     ->where('barang.status', 'TERSEDIA')->groupBy('barang.nama_barang')->get();
+        $namaBarangPenjualan = Penjualan::join('barang', 'penjualan.nomor_rangka', '=', 'barang.id')
+            ->select('barang.nama_barang')
+            ->groupBy('barang.nama_barang')->get();
+        
+        $chartBarang = Barang::select('barang.nama_barang', DB::raw('count(barang.nama_barang) as totalBarang'))
+            ->whereIn('barang.nama_barang', $namaBarangPenjualan)->groupBy('barang.nama_barang')->get();
         $chartPenjualan = Penjualan::join('barang', 'penjualan.nomor_rangka', '=', 'barang.id')
             ->select('barang.nama_barang', DB::raw('count(penjualan.no_fj) as total'))
             ->groupBy('barang.nama_barang')->get();
         
-        $labelPenjualan = $chartPenjualan->pluck('nama_barang');
-        $dataPenjualan = $chartPenjualan->pluck('total');
+        $data = [];
+        foreach($chartBarang as $dataBarang){
+            $data[$dataBarang->nama_barang]['totalDataBarang'] = $dataBarang->totalBarang;
+        }
+
+        foreach($chartPenjualan as $dataPenjualan){
+            $data[$dataPenjualan->nama_barang]['totalPenjualan'] = $dataPenjualan->total;
+        }
+
+
+        $chartData = [];
+        $label = [];
+        $persentase = [];
+
+        foreach($data as $namaBarang=>$item){
+            $totalBarang = isset($item['totalDataBarang'])? $item['totalDataBarang'] : 0;
+            $totalPenjualan = isset($item['totalPenjualan'])? $item['totalPenjualan'] : 0;
+
+            $label[] = $namaBarang;
+            $chartData[] = $totalPenjualan;
+            
+            if($totalBarang > 0){
+                $persentase = round(($totalPenjualan / $totalBarang) *100, 2);
+            }else{
+                $persentase = 0;
+            }
+            $persentases[] = $persentase;
+        }
+
+        $chartDataJson = json_encode($chartData);
+        $labelJson = json_encode($label);
+        $persentasesJson = json_encode($persentases);
 
         //Pengiriman
-        $chartPengiriman = Pengiriman::selectRaw("YEAR(surat_jalan) as tahun, MONTH(surat_jalan) as bulan, count(*) as total")
-            ->groupBy('tahun', 'bulan')->get();
-        
-        $chartDataPengiriman = [];
-        foreach($chartPengiriman as $data){
-            $tahun = $data->tahun;
-            $bulan = $data->bulan;
-            $total = $data->total;
-
-            $chartDataPengiriman[$tahun][$bulan] = $total;
-        }
 
         //GrowthPenjualanYoY
         $penjualanTahunSebelumnya = Penjualan::whereYear('created_at', date('Y') - 1)->count();
         $penjualanTahunIni = Penjualan::whereYear('created_at', date('Y'))->count();
 
-        $growthPenjualanYoY =  0 . '%';
+        $growthPenjualanYoY =  0;
         if($penjualanTahunSebelumnya != 0){
             $growthPenjualanYoY = (($penjualanTahunIni - $penjualanTahunSebelumnya) / $penjualanTahunSebelumnya) * 100;
-        }else{
-            $growthPenjualanYoY = ($penjualanTahunIni) * 100;
         }
-
         //GrowthPenjualanMoM
         $penjualanTahunBulanSebelumnya = Penjualan::whereYear('created_at', date('Y') - 1)
             ->whereMonth('created_at', date('m'))->count();
         $penjualanTahunBulanIni = Penjualan::whereYear('created_at', date('Y'))
             ->whereMonth('created_at', date('m'))->count();
 
-        $growthPenjualanMoM = 0 . '%';
+        $growthPenjualanMoM = 0;
         if($penjualanTahunBulanSebelumnya != 0){
             $growthPenjualanMoM = (($penjualanTahunBulanIni - $penjualanTahunBulanSebelumnya) / $penjualanTahunBulanSebelumnya) * 100;
-        }else{
-            $growthPenjualanMoM = ($penjualanTahunBulanIni) * 100;
         }
 
         //GrowthPenjualanMovM
         $penjualanBulanSebelumnya = Penjualan::whereMonth('created_at', date('m') - 1)->count();
         $penjualanBulanIni = Penjualan::whereMonth('created_at', date('m'))->count();
 
-        $growthPenjualanMovM =  0 . '%';
+        $growthPenjualanMovM =  0;
         if($penjualanBulanSebelumnya !=0){
             $growthPenjualanMovM = (($penjualanBulanIni - $penjualanBulanSebelumnya) / $penjualanBulanSebelumnya) * 100;
-        }else{
-            $growthPenjualanMovM = ($penjualanBulanIni) * 100;
         }
 
 
-        return view('dashboard.pemilik', compact('labelPenjualan', 'dataPenjualan', 'chartDataPengiriman', 'growthPenjualanYoY', 
-        'growthPenjualanMoM', 'growthPenjualanMovM'));
+        return view('dashboard.pemilik')->with(compact('chartDataJson', 'labelJson', 'persentasesJson',
+        'growthPenjualanYoY', 'growthPenjualanMoM', 'growthPenjualanMovM'));
     }
 
     public function karyawanPengirimHome(){

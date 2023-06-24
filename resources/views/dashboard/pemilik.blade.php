@@ -60,53 +60,42 @@
 </div>
 @include('template/footer')
 <script> 
-    const data = {
-        labels: {!! json_encode($labelPenjualan) !!},
-            datasets: [{
-                label: 'Data terdeteksi',
-                data: {!! json_encode($dataPenjualan) !!},
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 1,
-                hoverOffset: 4
-            }]
-    };
+    var ctx = document.getElementById('SPMTerjual').getContext('2d');
 
-    const config = {
-        type: 'pie',
-        data,
+    var chartData = <?php echo $chartDataJson; ?>;
+    var label = <?php echo $labelJson; ?>;
+    var persen = <?php echo $persentasesJson; ?>;
+
+    console.log(label);
+    var pieChart = new Chart(ctx, {
+        type: 'bar', 
+        data: {
+            labels: label,
+            datasets: [{
+                label: 'Persentase Data (%)',
+                data: persen,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(255, 106, 46, 0.8)'
+                ],
+            }],
+        },
         options: {
-            responsive: true,
-            maintainAspectRatio: false,
             plugins: {
                 tooltip: {
                     callbacks: {
                         label: function(context){
-                            var label = context.label || '';
-                            if(label){
-                                label += ': ';
-                            }
-                            label += Math.round(context.parsed * 100) + '%';
-                            return label;
+                            var label= context.label || '';
+                            var persentase = '%';
+                            return label + ' : ' + persentase;
                         }
                     }
                 }
             }
         }
-    };
-
-    const myChart = new Chart(
-        document.getElementById('SPMTerjual'),
-        config
-    );
+    });
 </script>
 </body>
 </html>

@@ -31,4 +31,9 @@ class PengirimanKaryawanController extends Controller
                 ->with('success', 'Status Pengiriman berhasil diubah menjadi selesai!');
         }
     }
+
+    public function riwayatPengiriman(){
+        $riwayatPengiriman = Pengiriman::all();
+        return view('karyawanPengirim.histori', compact('riwayat_pengiriman'));
+    }
 }
